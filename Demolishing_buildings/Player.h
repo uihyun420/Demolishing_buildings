@@ -7,12 +7,13 @@ protected:
 
 	sf::Sprite body;
 	std::string texIds = "graphics/stand.png";
+	std::string texIdsJump = "graphics/jump.png";
 	
 
 	sf::Vector2f gravity = { 0.f, 50.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
 	bool isGrounded = true;
-	float speed = 200.f;
+	float speed = 0.f;
 
 	
 	int attack = 0;

@@ -49,6 +49,10 @@ void SceneGame::Exit()
 
 void SceneGame::Update(float dt)
 {
+	player->Update(dt);
+	background->Update(dt); 
+
+	Scene::Update(dt);
 }
 void SceneGame::Draw(sf::RenderWindow& window)
 {
