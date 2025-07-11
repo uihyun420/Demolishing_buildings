@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SceneGame.h"
 #include "Player.h"
+#include "BackGround.h"
 
 
 SceneGame::SceneGame()
@@ -12,8 +13,13 @@ void SceneGame::Init()
 {
 	texIds.push_back("graphics/bg.png");
 	texIds.push_back("graphics/stand.png");
+
+
 	player = new Player("Player");
+	background = new BackGround("background");
+
 	AddGameObject(player);
+	AddGameObject(background);
 
 	Scene::Init();
 }
@@ -21,6 +27,8 @@ void SceneGame::Enter()
 {
 	auto size = FRAMEWORK.GetWindowSizeF();
 	sf::Vector2f center{ size.x * 0.5f, size.y * 0.5f };
+
+	// ºä ¼³Á¤
 	uiView.setSize(size);
 	uiView.setCenter(center);
 	worldView.setSize(size);

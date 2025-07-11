@@ -1,18 +1,14 @@
 #pragma once
 #include "GameObject.h"
-
-class Player : public GameObject
+class BackGround : public GameObject
 {
 protected:
-	sf::Sprite body;
-	std::string texIds = "graphics/stand.png";
-
-	int attack = 0;
-	int Hp = 100;
+	sf::Sprite Background;
+	std::string texIds = "graphics/bg.png";
 
 public:
-	Player(const std::string& name = "");
-	~Player() override = default;
+	BackGround(const std::string& name = "");
+	virtual ~BackGround() = default;
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRotation(float rot) override;
@@ -25,6 +21,5 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
-
 };
 

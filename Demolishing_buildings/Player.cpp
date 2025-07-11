@@ -41,12 +41,10 @@ void Player::SetOrigin(Origins preset)
 }
 
 
-
 void Player::Init()
 {
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 1;
-	
 }
 
 void Player::Release()
@@ -56,8 +54,9 @@ void Player::Release()
 void Player::Reset()
 {
 	body.setTexture(TEXTURE_MGR.Get(texIds));
+	body.setPosition(0.f, 190.f);
+	body.setScale(0.5f, 0.5f);
 	SetOrigin(Origins::MC);
-	body.setPosition(0.f, 0.f);
 }
 
 void Player::Update(float dt)
