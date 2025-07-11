@@ -3,7 +3,7 @@
 class GameObject
 {
 protected:
-	std::string name;
+	std::string name; 
 	bool active = true;
 
 	sf::Vector2f position;
