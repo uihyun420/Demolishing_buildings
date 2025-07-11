@@ -43,8 +43,7 @@ void Player::SetOrigin(Origins preset)
 
 void Player::Init()
 {
-	sortingLayer = SortingLayers::Foreground;
-	sortingOrder = 1;
+
 }
 
 void Player::Release()
@@ -53,6 +52,9 @@ void Player::Release()
 
 void Player::Reset()
 {
+	sortingLayer = SortingLayers::Foreground;
+	sortingOrder = 1;
+
 	body.setTexture(TEXTURE_MGR.Get(texIds));
 	body.setPosition(0.f, 190.f);
 	body.setScale(0.5f, 0.5f);
@@ -61,9 +63,31 @@ void Player::Reset()
 
 void Player::Update(float dt)
 {
+	if (isGrounded && InputMgr::GetKeyDown(sf::Keyboard::Up))
+	{
+		texIds = "graphics/jump.png";
+		body.setTexture(TEXTURE_MGR.Get(texIds));
+		body.setScale(0.5f, 0.5f);
+		SetOrigin(Origins::MC);
+
+		velocity.y = -200.f;
+		speed = 200.f;
+	}
+
+	if (!isGrounded)
+	{
+		velocity += gravity * dt;
+	}
+
+	SetPosition(position);
+
 }
+
 
 void Player::Draw(sf::RenderWindow& window)
 {
 	window.draw(body);
 }
+
+
+

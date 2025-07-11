@@ -4,11 +4,19 @@
 class Player : public GameObject
 {
 protected:
+
 	sf::Sprite body;
 	std::string texIds = "graphics/stand.png";
+	
 
+	sf::Vector2f gravity = { 0.f, 50.f };
+	sf::Vector2f velocity = { 0.f, 0.f };
+	bool isGrounded = true;
+	float speed = 200.f;
+
+	
 	int attack = 0;
-	int Hp = 100;
+	int hp = 100;
 
 public:
 	Player(const std::string& name = "");
@@ -25,6 +33,8 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+
+	bool IsGrounded();
 
 };
 

@@ -2,6 +2,7 @@
 #include "SceneGame.h"
 #include "Player.h"
 #include "BackGround.h"
+#include "AniPlayer.h"
 
 
 SceneGame::SceneGame()
@@ -13,13 +14,16 @@ void SceneGame::Init()
 {
 	texIds.push_back("graphics/bg.png");
 	texIds.push_back("graphics/stand.png");
+	texIds.push_back("graphics/jump.png");
 
 
 	player = new Player("Player");
 	background = new BackGround("background");
+	
 
 	AddGameObject(player);
 	AddGameObject(background);
+	
 
 	Scene::Init();
 }
