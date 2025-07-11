@@ -98,7 +98,7 @@ void AniPlayer::Update(float dt)
 		position.y = 0.f;
 		isGrounded = true;
 	}
-	GetPosition();
+	
 
 	if (h != 0.f)
 	{

@@ -63,23 +63,22 @@ void Player::Reset()
 
 void Player::Update(float dt)
 {
+	
+
 	if (isGrounded && InputMgr::GetKeyDown(sf::Keyboard::Up))
 	{
+		isGrounded = false;
 		texIds = "graphics/jump.png";
 		body.setTexture(TEXTURE_MGR.Get(texIds));
 		body.setScale(0.5f, 0.5f);
 		SetOrigin(Origins::MC);
+		//SetPosition(position);
 
 		velocity.y = -200.f;
 		speed = 200.f;
 	}
 
-	if (!isGrounded)
-	{
-		velocity += gravity * dt;
-	}
-
-	SetPosition(position);
+	body.getPosition();
 
 }
 
