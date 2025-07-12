@@ -72,8 +72,8 @@ void Player::Update(float dt)
 		SetOrigin(Origins::MC); 
 		body.setPosition(body.getPosition().x, body.getPosition().y); 
 
-		velocity.y = -300.f; 
-		speed = 500.f; 
+		velocity.y = -1000.f; 
+		//speed = 1000.f; 
 	}
 
 	if (!isGrounded)
@@ -82,6 +82,14 @@ void Player::Update(float dt)
 		body.move(velocity * dt);
 	}
 	
+	if (body.getPosition().y >= 190.f)
+	{
+		isGrounded = true;
+		body.setTexture(TEXTURE_MGR.Get(texIds));
+		body.setScale(0.5f, 0.5f);
+		SetOrigin(Origins::MC);
+	}
+
 	SetPosition(body.getPosition()); 
 }
 

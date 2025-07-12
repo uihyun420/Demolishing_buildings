@@ -10,7 +10,7 @@ protected:
 	std::string texIdsJump = "graphics/jump.png";
 	
 
-	sf::Vector2f gravity = { 0.f, 50.f };
+	sf::Vector2f gravity = { 0.f, 100.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
 	bool isGrounded = true;
 	float speed = 0.f;
