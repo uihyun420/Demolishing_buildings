@@ -1,27 +1,21 @@
 #pragma once
 #include "GameObject.h"
-
-class Player : public GameObject
+class Building :  public GameObject
 {
 protected:
+	sf::Sprite building;
+	std::string texIds = "graphics/building.png";
 
-	sf::Sprite body;
-	std::string texIds = "graphics/stand.png";
-	std::string texIdsJump = "graphics/jump.png";
-	
+	sf::Vector2f gravity = { 0.f, 70.f };
+	sf::Vector2f velocity = { 0.f, 0.f }; 
+	bool isGrounded = false;
 
-	sf::Vector2f gravity = { 0.f, 300.f };
-	sf::Vector2f velocity = { 0.f, 0.f };
-	bool isGrounded = true;
-	float speed = 1000.f;
-
-	
 	int attack = 0;
 	int hp = 100;
 
 public:
-	Player(const std::string& name = "");
-	~Player() override = default;
+	Building(const std::string& name = "");
+	~Building() override = default;
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRotation(float rot) override;
@@ -29,10 +23,16 @@ public:
 	void SetOrigin(const sf::Vector2f& o) override;
 	void SetOrigin(Origins preset) override;
 
+
+	// GameObject을(를) 통해 상속됨
 	void Init() override;
+
 	void Release() override;
+
 	void Reset() override;
+
 	void Update(float dt) override;
+
 	void Draw(sf::RenderWindow& window) override;
 
 };

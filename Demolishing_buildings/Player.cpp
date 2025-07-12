@@ -43,7 +43,6 @@ void Player::SetOrigin(Origins preset)
 
 void Player::Init()
 {
-
 }
 
 void Player::Release()
@@ -72,8 +71,7 @@ void Player::Update(float dt)
 		SetOrigin(Origins::MC); 
 		body.setPosition(body.getPosition().x, body.getPosition().y); 
 
-		velocity.y = -1000.f; 
-		//speed = 1000.f; 
+		velocity.y = -1500.f; 
 	}
 
 	if (!isGrounded)
