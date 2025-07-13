@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "Scene.h"
 
 
 Player::Player(const std::string& name)
@@ -57,7 +58,7 @@ void Player::Reset()
 	body.setTexture(TEXTURE_MGR.Get(texIds));
 	body.setPosition(0.f, 190.f);
 	body.setScale(0.5f, 0.5f);
-	SetOrigin(Origins::MC);
+	SetOrigin(Origins::BC);
 }
 
 void Player::Update(float dt)
@@ -70,7 +71,6 @@ void Player::Update(float dt)
 		body.setScale(0.5f, 0.5f); 
 		SetOrigin(Origins::MC); 
 		body.setPosition(body.getPosition().x, body.getPosition().y); 
-
 		velocity.y = -1500.f; 
 	}
 
@@ -96,6 +96,12 @@ void Player::Draw(sf::RenderWindow& window)
 {
 	window.draw(body);
 }
+
+bool Player::PlayerJump()
+{
+	return !isGrounded;
+}
+
 
 
 

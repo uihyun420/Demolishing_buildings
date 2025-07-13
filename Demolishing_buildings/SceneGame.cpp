@@ -40,7 +40,7 @@ void SceneGame::Enter()
 	uiView.setSize(size);
 	uiView.setCenter(center);
 	worldView.setSize(size);
-	worldView.setCenter(player->GetPosition());
+	worldView.setCenter(player->GetPosition().x, player ->GetPosition().y);
 
 	Scene::Enter();
 }
@@ -56,6 +56,14 @@ void SceneGame::Update(float dt)
 	player->Update(dt);
 	background->Update(dt); 
 	building->Update(dt);
+
+	//worldView.setCenter(player->GetPosition().x, player->GetPosition().y);
+	
+	if (player->PlayerJump())
+	{
+		worldView.setCenter(player->GetPosition().x, player->GetPosition().y);
+	}
+
 
 	Scene::Update(dt);
 }
