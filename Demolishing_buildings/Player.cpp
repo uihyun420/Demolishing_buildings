@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Scene.h"
+#include "Building.h"
+#include "Utils.h"
 
 
 Player::Player(const std::string& name)
@@ -55,17 +57,21 @@ void Player::Reset()
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 1;
 
+	
 	body.setTexture(TEXTURE_MGR.Get(texIds));
 	body.setPosition(0.f, 190.f);
 	body.setScale(0.5f, 0.5f);
 	SetOrigin(Origins::BC);
+	isGrounded = true;
 
-	
 }
 
 void Player::Update(float dt)
 {
 	hitBox.UpdateTransform(body, body.getLocalBounds());
+	bool isCollidingWithBuilding = false; // 거눔ㄹ과 충돌 중인지 미리 체크 건물 안에 플레이어가 있다면 점프 못하게 하려고 설정 
+
+
 
 	if (isGrounded && InputMgr::GetKeyDown(sf::Keyboard::Up))
 	{
@@ -89,6 +95,23 @@ void Player::Update(float dt)
 		body.setTexture(TEXTURE_MGR.Get(texIds));
 		body.setScale(0.5f, 0.5f);
 		SetOrigin(Origins::MC);
+	}
+
+	if (building) // 빌딩 객체가 설정되어 있는 경우에만 충돌 검사 진행
+	{
+		if (Utils::CheckCollision(hitBox.rect, building ->GetHitBox())) // 충돌 체크
+		{
+			sf::FloatRect playerBounds = hitBox.rect.getGlobalBounds(); // 플레이어의 히트박스 글로벌 바운드
+			sf::FloatRect buildingBounds = building->GetHitBox().getGlobalBounds(); // 빌딩의 히트박스 글로벌 바운드
+			//std::cout << "xx" << std::endl; 
+
+			//if (velocity.y < 0 && playerBounds.top <= buildingBounds.top + buildingBounds.height &&	playerBounds.top + playerBounds.height > buildingBounds.top + buildingBounds.height)
+			//{
+			//	// 플레이어를 건물 아랫면 바로 아래로 이동
+			//	body.setPosition(body.getPosition().x, buildingBounds.top + buildingBounds.height + playerBounds.height / 2.f);
+			//	velocity.y = 0.f;
+			//}
+		}
 	}
 
 	SetPosition(body.getPosition()); 

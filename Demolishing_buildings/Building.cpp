@@ -86,3 +86,7 @@ void Building::Draw(sf::RenderWindow& window)
 	hitBox.Draw(window);
 }
 
+const sf::RectangleShape& Building::GetHitBox() const
+{
+	return hitBox.rect;
+}

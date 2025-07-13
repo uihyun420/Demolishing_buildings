@@ -18,6 +18,8 @@ protected:
 	HitBox hitBox;
 
 public:
+	
+
 	Building(const std::string& name = "");
 	~Building() override = default;
 
@@ -38,6 +40,8 @@ public:
 	void Update(float dt) override;
 
 	void Draw(sf::RenderWindow& window) override;
+
+	const sf::RectangleShape& GetHitBox() const;
 
 };
 

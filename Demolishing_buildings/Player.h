@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "HitBox.h"
+class Building;
 
 class Player : public GameObject
 {
@@ -21,7 +22,7 @@ protected:
 	int hp = 100;
 
 	HitBox hitBox;
-
+	Building* building;
 
 public:
 	Player(const std::string& name = "");
@@ -40,6 +41,7 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 
 	bool PlayerJump ();
-
+	void SetBuilding(Building* b) { building = b; } // 플레이어 객체에게 이 건물 객체를 가리키도록 설정
+	
 };
 

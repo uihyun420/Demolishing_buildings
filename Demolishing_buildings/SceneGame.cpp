@@ -17,18 +17,20 @@ void SceneGame::Init()
 	texIds.push_back("graphics/stand.png");
 	texIds.push_back("graphics/jump.png");
 	texIds.push_back("graphics/building.png");
-	fontIds.push_back("fonts/zombiecontrol.ttf");	
+
 
 
 	player = new Player("Player");
 	background = new BackGround("background");
 	building = new Building("building"); 
 	
+	player->SetBuilding(building); // 플레이어와 빌딩 연결해야 충돌검사 등 진행
 
 	AddGameObject(player);
 	AddGameObject(background);
 	AddGameObject(building); 
 	
+
 
 	Scene::Init();
 }
