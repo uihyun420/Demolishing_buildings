@@ -12,6 +12,10 @@ protected:
 	BackGround* background;
 	Building* building;
 
+	bool isGrounded = false;
+
+
+
 public:
 	SceneGame();
 	~SceneGame() override = default;

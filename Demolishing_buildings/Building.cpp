@@ -85,3 +85,4 @@ void Building::Draw(sf::RenderWindow& window)
 	window.draw(building);
 	hitBox.Draw(window);
 }
+

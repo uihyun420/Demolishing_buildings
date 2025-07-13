@@ -56,6 +56,7 @@ void BackGround::Reset()
 {
 	Background.setTexture(TEXTURE_MGR.Get(texIds));
 	Background.setPosition(0.f, 360);
+	Background.setScale(1.f, 1.f); 
 	SetOrigin(Origins::BC);
 }
 

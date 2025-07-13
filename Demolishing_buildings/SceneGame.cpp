@@ -17,6 +17,7 @@ void SceneGame::Init()
 	texIds.push_back("graphics/stand.png");
 	texIds.push_back("graphics/jump.png");
 	texIds.push_back("graphics/building.png");
+	fontIds.push_back("fonts/zombiecontrol.ttf");	
 
 
 	player = new Player("Player");
@@ -56,15 +57,17 @@ void SceneGame::Update(float dt)
 	player->Update(dt);
 	background->Update(dt); 
 	building->Update(dt);
-
-	//worldView.setCenter(player->GetPosition().x, player->GetPosition().y);
+	worldView.setCenter(player->GetPosition().x, player->GetPosition().y); // 플레이어 위치에 따라 뷰 이동
 	
-	if (player->PlayerJump())
-	{
-		worldView.setCenter(player->GetPosition().x, player->GetPosition().y);
-	}
-
-
+	//if (player->PlayerJump())
+	//{
+	//	worldView.setCenter(player->GetPosition().x, player->GetPosition().y);
+	//}
+	//else
+	//{
+	//	// 착지 순간: 뷰를 초기 위치(예: 맵 중앙)로 복귀
+	//	worldView.setCenter(0.f, 0.f); 	
+	//}
 	Scene::Update(dt);
 }
 void SceneGame::Draw(sf::RenderWindow& window)
