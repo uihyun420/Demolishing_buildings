@@ -1,5 +1,7 @@
 #pragma once
 #include "GameObject.h"
+#include "HitBox.h"
+
 class Building :  public GameObject
 {
 protected:
@@ -12,6 +14,8 @@ protected:
 
 	int attack = 0;
 	int hp = 100;
+
+	HitBox hitBox;
 
 public:
 	Building(const std::string& name = "");

@@ -59,10 +59,13 @@ void Player::Reset()
 	body.setPosition(0.f, 190.f);
 	body.setScale(0.5f, 0.5f);
 	SetOrigin(Origins::BC);
+
+	
 }
 
 void Player::Update(float dt)
 {
+	hitBox.UpdateTransform(body, body.getLocalBounds());
 
 	if (isGrounded && InputMgr::GetKeyDown(sf::Keyboard::Up))
 	{
@@ -95,6 +98,7 @@ void Player::Update(float dt)
 void Player::Draw(sf::RenderWindow& window)
 {
 	window.draw(body);
+	hitBox.Draw(window);
 }
 
 bool Player::PlayerJump()

@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "HitBox.h"
 
 class Player : public GameObject
 {
@@ -18,6 +19,9 @@ protected:
 	
 	int attack = 0;
 	int hp = 100;
+
+	HitBox hitBox;
+
 
 public:
 	Player(const std::string& name = "");

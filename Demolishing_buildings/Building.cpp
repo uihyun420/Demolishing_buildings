@@ -56,12 +56,14 @@ void Building::Reset()
 	sortingOrder = 0;
 	building.setTexture(TEXTURE_MGR.Get(texIds));
 	building.setPosition(0.f, -2000.f);
-	building.setScale(1.f, 1.f);
+	building.setScale(0.8f, 0.8f);
 	SetOrigin(Origins::MC);
 }
 
 void Building::Update(float dt)
 {
+	hitBox.UpdateTransform(building, building.getLocalBounds());
+
 	if (!isGrounded)  
 	{
 		velocity.y += gravity.y * dt;
@@ -81,4 +83,5 @@ void Building::Update(float dt)
 void Building::Draw(sf::RenderWindow& window)
 {
 	window.draw(building);
+	hitBox.Draw(window);
 }
