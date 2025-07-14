@@ -9,6 +9,7 @@
 
 
 
+
 SceneGame::SceneGame()
 	:Scene(SceneIds::Game)
 {
@@ -23,6 +24,7 @@ void SceneGame::Init()
 	texIds.push_back("graphics/jump.png");
 	texIds.push_back("graphics/building.png");
 	texIds.push_back("graphics/standattack.png");
+	texIds.push_back("graphics/jumpattack.png");
 	
 	player = new Player("Player");
 	background = new BackGround("background");

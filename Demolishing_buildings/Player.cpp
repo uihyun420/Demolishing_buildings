@@ -64,16 +64,21 @@ void Player::Reset()
 	body.setScale(0.5f, 0.5f);
 	SetOrigin(Origins::BC);
 	isGrounded = true;
-
+	isStandAttack = false;
 }
 
 void Player::Update(float dt)
 {
 	hitBox.UpdateTransform(body, body.getLocalBounds());
 
-	//bool isCollidingWithBuilding = false; // 거눔ㄹ과 충돌 중인지 미리 체크 건물 안에 플레이어가 있다면 점프 못하게 하려고 설정 
-
-
+	if (body.getPosition().y >= 190.f)
+	{
+		isGrounded = true;
+		isStandAttack = false;
+		body.setTexture(TEXTURE_MGR.Get(texIds));
+		body.setScale(0.5f, 0.5f);
+		SetOrigin(Origins::MC);
+	}
 
 	if (isGrounded && InputMgr::GetKeyDown(sf::Keyboard::Up))
 	{
@@ -91,13 +96,26 @@ void Player::Update(float dt)
 		body.move(velocity * dt);
 	}
 	
-	if (body.getPosition().y >= 190.f)
+
+	if (!isStandAttack && InputMgr::GetKeyDown(sf::Keyboard::Z))
 	{
-		isGrounded = true;
+		body.setTexture(TEXTURE_MGR.Get(texIdsAttack));
+		body.setScale(0.5f, 0.5f);
+		SetOrigin(Origins::MC);
+		body.setPosition(body.getPosition().x, body.getPosition().y);
+		isStandAttack = true;
+	}
+
+	if (isStandAttack && InputMgr::GetKeyUp(sf::Keyboard::Z))
+	{
 		body.setTexture(TEXTURE_MGR.Get(texIds));
 		body.setScale(0.5f, 0.5f);
 		SetOrigin(Origins::MC);
+		body.setPosition(body.getPosition().x, body.getPosition().y);
+		isStandAttack = false;
 	}
+
+
 
 	if (building) // 빌딩 객체가 설정되어 있는 경우에만 충돌 검사 진행
 	{
@@ -114,19 +132,7 @@ void Player::Update(float dt)
 			}
 		}
 	}
-
-	if (isGrounded && InputMgr::GetKeyDown(sf::Keyboard::Z))
-	{
-		isGrounded = true;
-		body.setTexture(TEXTURE_MGR.Get(texIdsAttack));
-		body.setScale(0.5f, 0.5f);
-		SetOrigin(Origins::MC);
-		body.setPosition(body.getPosition().x, body.getPosition().y);
-	}
-
-
-
-
+	
 
 	SetPosition(body.getPosition()); 
 }

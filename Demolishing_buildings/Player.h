@@ -17,6 +17,8 @@ protected:
 	sf::Vector2f gravity = { 0.f, 300.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
 	bool isGrounded = true;
+	bool isStandAttack = false;
+	//bool isActive = true;
 	float speed = 1000.f;
 
 
