@@ -10,15 +10,19 @@ protected:
 	sf::Sprite body;
 	std::string texIds = "graphics/stand.png";
 	std::string texIdsJump = "graphics/jump.png";
-	
+	std::string texIdsAttack = "graphics/standattack.png";
+	std::string texIdsJumpAttack = "graphics/jumpattack.png";
+
 
 	sf::Vector2f gravity = { 0.f, 300.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
 	bool isGrounded = true;
 	float speed = 1000.f;
 
-	
+
 	int attack = 0;
+	float attackinterval = 0.2f;
+	float hitinterval = 1.f;
 	int hp = 100;
 
 	HitBox hitBox;
@@ -40,8 +44,8 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 
-	bool PlayerJump ();
+	bool PlayerJump();
 	void SetBuilding(Building* b) { building = b; } // 플레이어 객체에게 이 건물 객체를 가리키도록 설정
-	
+
 };
 

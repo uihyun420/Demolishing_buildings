@@ -8,6 +8,7 @@
 #include "Sky.h"
 
 
+
 SceneGame::SceneGame()
 	:Scene(SceneIds::Game)
 {
@@ -21,6 +22,7 @@ void SceneGame::Init()
 	texIds.push_back("graphics/stand.png");
 	texIds.push_back("graphics/jump.png");
 	texIds.push_back("graphics/building.png");
+	texIds.push_back("graphics/standattack.png");
 	
 	player = new Player("Player");
 	background = new BackGround("background");

@@ -57,6 +57,7 @@ void Player::Reset()
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 1;
 
+	attackinterval = 0.2f;
 	
 	body.setTexture(TEXTURE_MGR.Get(texIds));
 	body.setPosition(0.f, 190.f);
@@ -109,10 +110,23 @@ void Player::Update(float dt)
 			if (velocity.y < 0 && playerBounds.top < buildingBounds.top + buildingBounds.height)
 			{
 				velocity.y = 0;
-				body.setPosition(body.getPosition() + building->GetPosition()); // 
+				// 플레이어와 건물이 아예 안겹치도록 해야함 건물과 플레이어의 히트박스가 닿았을 때 건물이 플레이어를 밀어내도록 
 			}
 		}
 	}
+
+	if (isGrounded && InputMgr::GetKeyDown(sf::Keyboard::Z))
+	{
+		isGrounded = true;
+		body.setTexture(TEXTURE_MGR.Get(texIdsAttack));
+		body.setScale(0.5f, 0.5f);
+		SetOrigin(Origins::MC);
+		body.setPosition(body.getPosition().x, body.getPosition().y);
+	}
+
+
+
+
 
 	SetPosition(body.getPosition()); 
 }
