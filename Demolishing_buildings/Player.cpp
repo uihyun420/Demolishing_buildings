@@ -150,20 +150,6 @@ void Player::Update(float dt)
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	if (building) // 빌딩 객체가 설정되어 있는 경우에만 충돌 검사 진행
 	{
 		if (Utils::CheckCollision(hitBox.rect, building ->GetHitBox())) 
@@ -174,13 +160,12 @@ void Player::Update(float dt)
 
 			if (velocity.y < 0 && playerBounds.top < buildingBounds.top + buildingBounds.height)
 			{
-				velocity.y = 0;
+				velocity.y = 500; // 꼼수
 
 				// 플레이어와 건물이 아예 안겹치도록 해야함 건물과 플레이어의 히트박스가 닿았을 때 건물이 플레이어를 밀어내도록 
 				//body.setPosition(body.getPosition().x, (buildingBounds.top + buildingBounds.height)-playerBounds.top); 이건 셋포지션이라 그 자리로 순간이동 되는거 같음 
 				// 실시간으로 계속 업데이트 해야함 		
 
-						
 			}
 		}
 	}
