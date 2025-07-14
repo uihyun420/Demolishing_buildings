@@ -66,6 +66,7 @@ void Player::Reset()
 	SetOrigin(Origins::BC);
 	isGrounded = true;
 	isStandAttack = false;
+	isStandDefense = false;
 }
 
 void Player::Update(float dt)
@@ -120,6 +121,48 @@ void Player::Update(float dt)
 	}
 
 
+	if (isGrounded && InputMgr::GetKeyDown(sf::Keyboard::Down))
+	{
+		//isGrounded = true;
+		//isStandAttack = false;
+		body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
+		body.setScale(0.5f, 0.5f);
+		SetOrigin(Origins::MC);
+		body.setPosition(body.getPosition().x, body.getPosition().y);
+	}
+
+
+	if (!isStandDefense && InputMgr::GetKeyDown(sf::Keyboard::Down))
+	{
+		isStandDefense = true;
+		body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
+		body.setScale(0.5f, 0.5f);
+		SetOrigin(Origins::MC);
+		body.setPosition(body.getPosition().x, body.getPosition().y);
+	}
+	if (isStandDefense && InputMgr::GetKeyUp(sf::Keyboard::Down))
+	{
+		isStandDefense = false;
+		body.setTexture(TEXTURE_MGR.Get(texIdsJump), true);
+		body.setScale(0.5f, 0.5f);
+		SetOrigin(Origins::MC);
+		body.setPosition(body.getPosition().x, body.getPosition().y);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	if (building) // 빌딩 객체가 설정되어 있는 경우에만 충돌 검사 진행
 	{
@@ -132,12 +175,15 @@ void Player::Update(float dt)
 			if (velocity.y < 0 && playerBounds.top < buildingBounds.top + buildingBounds.height)
 			{
 				velocity.y = 0;
+
 				// 플레이어와 건물이 아예 안겹치도록 해야함 건물과 플레이어의 히트박스가 닿았을 때 건물이 플레이어를 밀어내도록 
-				
+				//body.setPosition(body.getPosition().x, (buildingBounds.top + buildingBounds.height)-playerBounds.top); 이건 셋포지션이라 그 자리로 순간이동 되는거 같음 
+				// 실시간으로 계속 업데이트 해야함 		
+
+						
 			}
 		}
 	}
-	
 
 	SetPosition(body.getPosition()); 
 }
@@ -153,7 +199,3 @@ void Player::Draw(sf::RenderWindow& window)
 //{
 //	return !isGrounded;
 //}
-
-
-
-

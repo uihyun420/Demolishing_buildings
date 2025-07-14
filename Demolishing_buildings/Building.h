@@ -42,6 +42,5 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 
 	const sf::RectangleShape& GetHitBox() const;
-
 };
 

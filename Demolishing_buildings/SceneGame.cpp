@@ -7,9 +7,6 @@
 #include "Ground.h"
 #include "Sky.h"
 
-
-
-
 SceneGame::SceneGame()
 	:Scene(SceneIds::Game)
 {
@@ -25,6 +22,8 @@ void SceneGame::Init()
 	texIds.push_back("graphics/building.png");
 	texIds.push_back("graphics/standattack.png");
 	texIds.push_back("graphics/jumpattack.png");
+	texIds.push_back("graphics/standguard.png");
+
 	
 	player = new Player("Player");
 	background = new BackGround("background");
@@ -69,6 +68,12 @@ void SceneGame::Update(float dt)
 	building->Update(dt);
 	worldView.setCenter(player->GetPosition().x, player->GetPosition().y); // 플레이어 위치에 따라 뷰 이동
 	
+
+	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
+	{
+		SCENE_MGR.ChangeScene(SceneIds::Game);
+	}
+
 	//if (player->PlayerJump())
 	//{
 	//	worldView.setCenter(player->GetPosition().x, player->GetPosition().y);

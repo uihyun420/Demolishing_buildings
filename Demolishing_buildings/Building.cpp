@@ -57,6 +57,7 @@ void Building::Reset()
 	building.setTexture(TEXTURE_MGR.Get(texIds));
 	building.setPosition(0.f, -2500.f);
 	building.setScale(0.8f, 0.8f);
+	isGrounded = false;
 	SetOrigin(Origins::MC);
 }
 
