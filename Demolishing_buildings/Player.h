@@ -46,7 +46,7 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 
-	bool PlayerJump();
+	//bool PlayerJump();
 	void SetBuilding(Building* b) { building = b; } // 플레이어 객체에게 이 건물 객체를 가리키도록 설정
 
 };

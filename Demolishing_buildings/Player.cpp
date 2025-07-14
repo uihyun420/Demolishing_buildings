@@ -64,7 +64,7 @@ void Player::Reset()
 	body.setScale(0.5f, 0.5f);
 	SetOrigin(Origins::BC);
 	isGrounded = true;
-	isStandAttack = false;
+	//isStandAttack = false;
 }
 
 void Player::Update(float dt)
@@ -74,7 +74,7 @@ void Player::Update(float dt)
 	if (body.getPosition().y >= 190.f)
 	{
 		isGrounded = true;
-		isStandAttack = false;
+		//isStandAttack = false;
 		body.setTexture(TEXTURE_MGR.Get(texIds));
 		body.setScale(0.5f, 0.5f);
 		SetOrigin(Origins::MC);
@@ -83,6 +83,7 @@ void Player::Update(float dt)
 	if (isGrounded && InputMgr::GetKeyDown(sf::Keyboard::Up))
 	{
 		isGrounded = false;
+		//isStandAttack = false;
 		body.setTexture(TEXTURE_MGR.Get(texIdsJump)); 
 		body.setScale(0.5f, 0.5f); 
 		SetOrigin(Origins::MC); 
@@ -103,7 +104,8 @@ void Player::Update(float dt)
 		body.setScale(0.5f, 0.5f);
 		SetOrigin(Origins::MC);
 		body.setPosition(body.getPosition().x, body.getPosition().y);
-		isStandAttack = true;
+		//isStandAttack = true;
+		//isGrounded = false;
 	}
 
 	if (isStandAttack && InputMgr::GetKeyUp(sf::Keyboard::Z))
@@ -112,7 +114,8 @@ void Player::Update(float dt)
 		body.setScale(0.5f, 0.5f);
 		SetOrigin(Origins::MC);
 		body.setPosition(body.getPosition().x, body.getPosition().y);
-		isStandAttack = false;
+		//isStandAttack = false;
+		//isGrounded = true;
 	}
 
 
@@ -144,10 +147,10 @@ void Player::Draw(sf::RenderWindow& window)
 	hitBox.Draw(window);
 }
 
-bool Player::PlayerJump()
-{
-	return !isGrounded;
-}
+//bool Player::PlayerJump()
+//{
+//	return !isGrounded;
+//}
 
 
 
