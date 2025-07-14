@@ -69,7 +69,8 @@ void Player::Reset()
 void Player::Update(float dt)
 {
 	hitBox.UpdateTransform(body, body.getLocalBounds());
-	bool isCollidingWithBuilding = false; // 거눔ㄹ과 충돌 중인지 미리 체크 건물 안에 플레이어가 있다면 점프 못하게 하려고 설정 
+
+	//bool isCollidingWithBuilding = false; // 거눔ㄹ과 충돌 중인지 미리 체크 건물 안에 플레이어가 있다면 점프 못하게 하려고 설정 
 
 
 
@@ -99,18 +100,17 @@ void Player::Update(float dt)
 
 	if (building) // 빌딩 객체가 설정되어 있는 경우에만 충돌 검사 진행
 	{
-		if (Utils::CheckCollision(hitBox.rect, building ->GetHitBox())) // 충돌 체크
+		if (Utils::CheckCollision(hitBox.rect, building ->GetHitBox())) 
 		{
-			sf::FloatRect playerBounds = hitBox.rect.getGlobalBounds(); // 플레이어의 히트박스 글로벌 바운드
-			sf::FloatRect buildingBounds = building->GetHitBox().getGlobalBounds(); // 빌딩의 히트박스 글로벌 바운드
-			//std::cout << "xx" << std::endl; 
+			sf::FloatRect playerBounds = hitBox.rect.getGlobalBounds(); 
+			sf::FloatRect buildingBounds = building->GetHitBox().getGlobalBounds(); 
+			//std::cout << "xxxx" << std::endl; 
 
-			//if (velocity.y < 0 && playerBounds.top <= buildingBounds.top + buildingBounds.height &&	playerBounds.top + playerBounds.height > buildingBounds.top + buildingBounds.height)
-			//{
-			//	// 플레이어를 건물 아랫면 바로 아래로 이동
-			//	body.setPosition(body.getPosition().x, buildingBounds.top + buildingBounds.height + playerBounds.height / 2.f);
-			//	velocity.y = 0.f;
-			//}
+			if (velocity.y < 0 && playerBounds.top < buildingBounds.top + buildingBounds.height)
+			{
+				velocity.y = 0;
+				body.setPosition(body.getPosition() + building->GetPosition()); // 
+			}
 		}
 	}
 

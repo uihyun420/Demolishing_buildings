@@ -1,18 +1,13 @@
 #pragma once
 #include "GameObject.h"
-
-
-
-
-class BackGround : public GameObject
+class Sky : public GameObject
 {
 protected:
-	sf::Sprite Background;
-	std::string texIds = "graphics/bg.png";
-
+	sf::Sprite sky;
+	std::string skytexIds = "graphics/sky.png";
 public:
-	BackGround(const std::string& name = "");
-	virtual ~BackGround() = default;
+	Sky(const std::string& name = "");
+	virtual ~Sky() = default;
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRotation(float rot) override;

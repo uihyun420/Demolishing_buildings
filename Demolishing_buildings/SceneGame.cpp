@@ -4,6 +4,8 @@
 #include "BackGround.h"
 #include "AniPlayer.h"
 #include "Building.h"
+#include "Ground.h"
+#include "Sky.h"
 
 
 SceneGame::SceneGame()
@@ -14,23 +16,25 @@ SceneGame::SceneGame()
 void SceneGame::Init()
 {
 	texIds.push_back("graphics/bg.png");
+	texIds.push_back("graphics/ground.png");
+	texIds.push_back("graphics/sky.png");
 	texIds.push_back("graphics/stand.png");
 	texIds.push_back("graphics/jump.png");
 	texIds.push_back("graphics/building.png");
-
-
-
+	
 	player = new Player("Player");
 	background = new BackGround("background");
 	building = new Building("building"); 
+	ground = new Ground("ground");
+	sky = new Sky("sky");
 	
 	player->SetBuilding(building); // 플레이어와 빌딩 연결해야 충돌검사 등 진행
 
 	AddGameObject(player);
 	AddGameObject(background);
 	AddGameObject(building); 
-	
-
+	AddGameObject(ground);
+	AddGameObject(sky);
 
 	Scene::Init();
 }
@@ -67,7 +71,6 @@ void SceneGame::Update(float dt)
 	//}
 	//else
 	//{
-	//	// 착지 순간: 뷰를 초기 위치(예: 맵 중앙)로 복귀
 	//	worldView.setCenter(0.f, 0.f); 	
 	//}
 	Scene::Update(dt);

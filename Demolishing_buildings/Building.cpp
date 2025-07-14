@@ -55,7 +55,7 @@ void Building::Reset()
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 0;
 	building.setTexture(TEXTURE_MGR.Get(texIds));
-	building.setPosition(0.f, -2000.f);
+	building.setPosition(0.f, -2500.f);
 	building.setScale(0.8f, 0.8f);
 	SetOrigin(Origins::MC);
 }
@@ -70,7 +70,7 @@ void Building::Update(float dt)
 		building.move(velocity * dt);
 	}
 
-	if (building.getPosition().y >= -50.f) 
+	if (building.getPosition().y >= -160.f) 
 	{
 		velocity.y = 0.f; 
 		isGrounded = true;

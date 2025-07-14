@@ -4,6 +4,8 @@
 class Player;
 class BackGround;
 class Building;
+class Ground;
+class Sky;
 
 class SceneGame : public Scene
 {
@@ -11,6 +13,8 @@ protected:
 	Player* player;
 	BackGround* background;
 	Building* building;
+	Ground* ground;
+	Sky* sky;
 
 	bool isGrounded = false;
 

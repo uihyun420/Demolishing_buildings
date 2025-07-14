@@ -2,6 +2,7 @@
 #include "BackGround.h"
 
 
+
 BackGround::BackGround(const std::string& name)
 	: GameObject(name)
 {
@@ -58,6 +59,7 @@ void BackGround::Reset()
 	Background.setPosition(0.f, 360);
 	Background.setScale(1.f, 1.f); 
 	SetOrigin(Origins::BC);
+
 }
 
 void BackGround::Update(float dt)
