@@ -77,6 +77,7 @@ void SceneGame::Update(float dt)
 	//{
 	//	worldView.setCenter(0.f, 0.f); 	
 	//}
+
 	Scene::Update(dt);
 }
 void SceneGame::Draw(sf::RenderWindow& window)

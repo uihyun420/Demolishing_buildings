@@ -18,8 +18,6 @@ protected:
 
 	bool isGrounded = false;
 
-
-
 public:
 	SceneGame();
 	~SceneGame() override = default;

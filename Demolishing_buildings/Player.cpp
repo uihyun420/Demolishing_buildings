@@ -59,12 +59,13 @@ void Player::Reset()
 
 	attackinterval = 0.2f;
 	
-	body.setTexture(TEXTURE_MGR.Get(texIds));
+	body.setTexture(TEXTURE_MGR.Get(texIds) , true);
+	//body.setTexture(TEXTURE_MGR.Get(texIdsJumpAttack));
 	body.setPosition(0.f, 190.f);
 	body.setScale(0.5f, 0.5f);
 	SetOrigin(Origins::BC);
 	isGrounded = true;
-	//isStandAttack = false;
+	isStandAttack = false;
 }
 
 void Player::Update(float dt)
@@ -75,7 +76,7 @@ void Player::Update(float dt)
 	{
 		isGrounded = true;
 		//isStandAttack = false;
-		body.setTexture(TEXTURE_MGR.Get(texIds));
+		body.setTexture(TEXTURE_MGR.Get(texIds) , true);
 		body.setScale(0.5f, 0.5f);
 		SetOrigin(Origins::MC);
 	}
@@ -97,25 +98,25 @@ void Player::Update(float dt)
 		body.move(velocity * dt);
 	}
 	
-
+	/*attackinterval += dt;*/
 	if (!isStandAttack && InputMgr::GetKeyDown(sf::Keyboard::Z))
 	{
-		body.setTexture(TEXTURE_MGR.Get(texIdsAttack));
+		body.setTexture(TEXTURE_MGR.Get(texIdsJumpAttack) , true); // 텍스트 사이즈가 다 달라서 하나하나 불러올 때마다 true로 설정해줘야함.
 		body.setScale(0.5f, 0.5f);
 		SetOrigin(Origins::MC);
 		body.setPosition(body.getPosition().x, body.getPosition().y);
-		//isStandAttack = true;
-		//isGrounded = false;
+		isStandAttack = true;
+		isGrounded = false;
 	}
 
 	if (isStandAttack && InputMgr::GetKeyUp(sf::Keyboard::Z))
 	{
-		body.setTexture(TEXTURE_MGR.Get(texIds));
+		attackinterval = 1.f;
+		body.setTexture(TEXTURE_MGR.Get(texIds) , true);
 		body.setScale(0.5f, 0.5f);
 		SetOrigin(Origins::MC);
 		body.setPosition(body.getPosition().x, body.getPosition().y);
-		//isStandAttack = false;
-		//isGrounded = true;
+		isStandAttack = false;
 	}
 
 
@@ -132,6 +133,7 @@ void Player::Update(float dt)
 			{
 				velocity.y = 0;
 				// 플레이어와 건물이 아예 안겹치도록 해야함 건물과 플레이어의 히트박스가 닿았을 때 건물이 플레이어를 밀어내도록 
+				
 			}
 		}
 	}
