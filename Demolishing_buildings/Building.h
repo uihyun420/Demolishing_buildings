@@ -8,7 +8,7 @@ protected:
 	sf::Sprite building;
 	std::string texIds = "graphics/building.png";
 
-	sf::Vector2f gravity = { 0.f, 70.f };
+	sf::Vector2f gravity = { 0.f, 150.f };
 	sf::Vector2f velocity = { 0.f, 0.f }; 
 	bool isGrounded = false;
 
@@ -42,5 +42,9 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 
 	const sf::RectangleShape& GetHitBox() const;
+
+	sf::Vector2f SetVelocity(const sf::Vector2f& vel) { return velocity = vel; }
+	
+	
 };
 

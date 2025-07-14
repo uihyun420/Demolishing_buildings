@@ -16,7 +16,7 @@ protected:
 	std::string texIdsstandguard = "graphics/standguard.png";
 
 
-	sf::Vector2f gravity = { 0.f, 300.f };
+	sf::Vector2f gravity = { 0.f, 150.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
 	bool isGrounded = true;
 	bool isStandAttack = false;
