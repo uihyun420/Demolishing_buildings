@@ -86,9 +86,13 @@ void Player::Update(float dt)
 	if (body.getPosition().y >= 190.f)
 	{
 		isGrounded = true;
-		body.setTexture(TEXTURE_MGR.Get(texIds) , true);
-		body.setScale(0.5f, 0.5f);
-		SetOrigin(Origins::MC);
+		if (!isStandAttack && !isStandDefense)
+		{
+			body.setTexture(TEXTURE_MGR.Get(texIds), true);
+			body.setScale(0.5f, 0.5f);
+			SetOrigin(Origins::MC);
+			body.setPosition(body.getPosition().x, 190.f);
+		}
 	}
 
 	if (isGrounded && InputMgr::GetKeyDown(sf::Keyboard::Up))
@@ -103,12 +107,12 @@ void Player::Update(float dt)
 
 	if (!isStandAttack && InputMgr::GetKeyDown(sf::Keyboard::Z))
 	{
-		body.setTexture(TEXTURE_MGR.Get(texIdsJumpAttack) , true); // 텍스트 사이즈가 다 달라서 하나하나 불러올 때마다 true로 설정해줘야함.
+		body.setTexture(TEXTURE_MGR.Get(texIdsAttack) , true); // 텍스트 사이즈가 다 달라서 하나하나 불러올 때마다 true로 설정해줘야함.
 		body.setScale(0.5f, 0.5f);
 		SetOrigin(Origins::MC);
 		body.setPosition(body.getPosition().x, body.getPosition().y);
 		isStandAttack = true;
-		isGrounded = false;
+		
 	}
 
 	if (isStandAttack && InputMgr::GetKeyUp(sf::Keyboard::Z))
@@ -121,15 +125,6 @@ void Player::Update(float dt)
 		isStandAttack = false;
 	}
 
-	if (isattack)
-	{
-		if (isGrounded && InputMgr::GetKeyDown(sf::Keyboard::Down))
-		{
-			body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
-			body.setScale(0.5f, 0.5f);
-			SetOrigin(Origins::MC);
-			body.setPosition(body.getPosition().x, body.getPosition().y);
-		}
 
 		if (!isStandDefense && InputMgr::GetKeyDown(sf::Keyboard::Down))
 		{
@@ -139,13 +134,11 @@ void Player::Update(float dt)
 			SetOrigin(Origins::MC);
 			body.setPosition(body.getPosition().x, body.getPosition().y);
 		}
-	}
-	
 
 	if (isStandDefense && InputMgr::GetKeyUp(sf::Keyboard::Down))
 	{
 		isStandDefense = false;
-		body.setTexture(TEXTURE_MGR.Get(texIdsJump), true);
+		body.setTexture(TEXTURE_MGR.Get(texIds), true);
 		body.setScale(0.5f, 0.5f);
 		SetOrigin(Origins::MC);
 		body.setPosition(body.getPosition().x, body.getPosition().y);
@@ -172,6 +165,7 @@ void Player::Update(float dt)
 			{
 				if (InputMgr::GetKeyDown(sf::Keyboard::Down))
 				{
+					isStandDefense = true;
 					body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
 					body.setScale(0.5f, 0.5f);
 					SetOrigin(Origins::MC);
