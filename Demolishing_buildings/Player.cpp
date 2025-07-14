@@ -58,16 +58,16 @@ void Player::Reset()
 	sortingOrder = 1;
 
 	attackinterval = 0.2f;
-	
-	body.setTexture(TEXTURE_MGR.Get(texIds) , true);
+
+	body.setTexture(TEXTURE_MGR.Get(texIds), true);
 	//body.setTexture(TEXTURE_MGR.Get(texIdsJumpAttack));
 	body.setPosition(0.f, 190.f);
 	body.setScale(0.5f, 0.5f);
 	SetOrigin(Origins::BC);
 	isGrounded = true;
-	isStandAttack = false;
-	isStandDefense = false;
-	isattack = false;
+	isAttack = false;
+	isDefense = false;
+
 }
 
 void Player::Update(float dt)
@@ -86,7 +86,7 @@ void Player::Update(float dt)
 	if (body.getPosition().y >= 190.f)
 	{
 		isGrounded = true;
-		if (!isStandAttack && !isStandDefense)
+		if (!isAttack && !isDefense)
 		{
 			body.setTexture(TEXTURE_MGR.Get(texIds), true);
 			body.setScale(0.5f, 0.5f);
@@ -98,46 +98,52 @@ void Player::Update(float dt)
 	if (isGrounded && InputMgr::GetKeyDown(sf::Keyboard::Up))
 	{
 		isGrounded = false;
-		body.setTexture(TEXTURE_MGR.Get(texIdsJump)); 
-		body.setScale(0.5f, 0.5f); 
-		SetOrigin(Origins::MC); 
-		body.setPosition(body.getPosition().x, body.getPosition().y); 
-		velocity.y = -1500.f; 
-	}
-
-	if (!isStandAttack && InputMgr::GetKeyDown(sf::Keyboard::Z))
-	{
-		body.setTexture(TEXTURE_MGR.Get(texIdsAttack) , true); // 텍스트 사이즈가 다 달라서 하나하나 불러올 때마다 true로 설정해줘야함.
+		body.setTexture(TEXTURE_MGR.Get(texIdsJump));
 		body.setScale(0.5f, 0.5f);
 		SetOrigin(Origins::MC);
 		body.setPosition(body.getPosition().x, body.getPosition().y);
-		isStandAttack = true;
-		
+		velocity.y = -1500.f;
 	}
 
-	if (isStandAttack && InputMgr::GetKeyUp(sf::Keyboard::Z))
+	if (!isAttack && InputMgr::GetKeyDown(sf::Keyboard::Z))
+	{
+		if (isGrounded)
+		{
+			body.setTexture(TEXTURE_MGR.Get(texIdsAttack), true); // 텍스트 사이즈가 다 달라서 하나하나 불러올 때마다 true로 설정해줘야함.
+		}
+		else
+		{
+			body.setTexture(TEXTURE_MGR.Get(texIdsJumpAttack), true);
+		}
+		body.setScale(0.5f, 0.5f);
+		SetOrigin(Origins::MC);
+		body.setPosition(body.getPosition().x, body.getPosition().y);
+		isAttack = true;
+	}
+
+	if (isAttack && InputMgr::GetKeyUp(sf::Keyboard::Z))
 	{
 		attackinterval = 1.f;
-		body.setTexture(TEXTURE_MGR.Get(texIds) , true);
+		body.setTexture(TEXTURE_MGR.Get(texIds), true);
 		body.setScale(0.5f, 0.5f);
 		SetOrigin(Origins::MC);
 		body.setPosition(body.getPosition().x, body.getPosition().y);
-		isStandAttack = false;
+		isAttack = false;
 	}
 
 
-		if (!isStandDefense && InputMgr::GetKeyDown(sf::Keyboard::Down))
-		{
-			isStandDefense = true;
-			body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
-			body.setScale(0.5f, 0.5f);
-			SetOrigin(Origins::MC);
-			body.setPosition(body.getPosition().x, body.getPosition().y);
-		}
-
-	if (isStandDefense && InputMgr::GetKeyUp(sf::Keyboard::Down))
+	if (!isDefense && InputMgr::GetKeyDown(sf::Keyboard::Down))
 	{
-		isStandDefense = false;
+		isDefense = true;
+		body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
+		body.setScale(0.5f, 0.5f);
+		SetOrigin(Origins::MC);
+		body.setPosition(body.getPosition().x, body.getPosition().y);
+	}
+
+	if (isDefense && InputMgr::GetKeyUp(sf::Keyboard::Down))
+	{
+		isDefense = false;
 		body.setTexture(TEXTURE_MGR.Get(texIds), true);
 		body.setScale(0.5f, 0.5f);
 		SetOrigin(Origins::MC);
@@ -147,10 +153,10 @@ void Player::Update(float dt)
 
 	if (building) // 빌딩 객체가 설정되어 있는 경우에만 충돌 검사 진행
 	{
-		if (Utils::CheckCollision(hitBox.rect, building ->GetHitBox())) 
+		if (Utils::CheckCollision(hitBox.rect, building->GetHitBox()))
 		{
-			sf::FloatRect playerBounds = hitBox.rect.getGlobalBounds(); 
-			sf::FloatRect buildingBounds = building->GetHitBox().getGlobalBounds(); 
+			sf::FloatRect playerBounds = hitBox.rect.getGlobalBounds();
+			sf::FloatRect buildingBounds = building->GetHitBox().getGlobalBounds();
 			//std::cout << "xxxx" << std::endl; 
 
 			sf::Vector2f push = { 0.f, 150.f };
@@ -165,19 +171,19 @@ void Player::Update(float dt)
 			{
 				if (InputMgr::GetKeyDown(sf::Keyboard::Down))
 				{
-					isStandDefense = true;
+					isDefense = true;
 					body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
 					body.setScale(0.5f, 0.5f);
 					SetOrigin(Origins::MC);
 					body.setPosition(body.getPosition().x, body.getPosition().y);
-					building->SetVelocity({0.f, -80.f});
+					building->SetVelocity({ 0.f, -80.f });
 					velocity.y = 1200.f;
 				}
 			}
 		}
 	}
 
-	SetPosition(body.getPosition()); 
+	SetPosition(body.getPosition());
 }
 
 

@@ -13,7 +13,7 @@ protected:
 	bool isGrounded = false;
 
 	int attack = 0;
-	int hp = 100;
+	int hp = 500;
 
 	HitBox hitBox;
 

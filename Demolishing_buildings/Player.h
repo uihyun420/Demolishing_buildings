@@ -19,15 +19,15 @@ protected:
 	sf::Vector2f gravity = { 0.f, 150.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
 	bool isGrounded = true;
-	bool isStandAttack = false;
-	bool isStandDefense = false;
-	bool isattack = false;
+	bool isAttack = false;
+	bool isDefense = false;
+
 	//bool isActive = true;
 	float speed = 1000.f;
 
 
-	int attack = 0;
-	float attackinterval = 10.f;
+	int attack = 10;
+	float attackinterval = 0.5f;
 	float hitinterval = 1.f;
 	int hp = 100;
 
