@@ -21,6 +21,7 @@ protected:
 	bool isGrounded = true;
 	bool isStandAttack = false;
 	bool isStandDefense = false;
+	bool isattack = false;
 	//bool isActive = true;
 	float speed = 1000.f;
 

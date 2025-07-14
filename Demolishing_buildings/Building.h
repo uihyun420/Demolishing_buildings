@@ -44,7 +44,6 @@ public:
 	const sf::RectangleShape& GetHitBox() const;
 
 	sf::Vector2f SetVelocity(const sf::Vector2f& vel) { return velocity = vel; }
-	
-	
+
 };
 

@@ -67,6 +67,7 @@ void Player::Reset()
 	isGrounded = true;
 	isStandAttack = false;
 	isStandDefense = false;
+	isattack = false;
 }
 
 void Player::Update(float dt)
@@ -76,10 +77,15 @@ void Player::Update(float dt)
 
 	hitBox.UpdateTransform(body, body.getLocalBounds());
 
+	if (!isGrounded)
+	{
+		velocity += gravity * dt;
+		body.move(velocity * dt);
+	}
+
 	if (body.getPosition().y >= 190.f)
 	{
 		isGrounded = true;
-		//isStandAttack = false;
 		body.setTexture(TEXTURE_MGR.Get(texIds) , true);
 		body.setScale(0.5f, 0.5f);
 		SetOrigin(Origins::MC);
@@ -88,7 +94,6 @@ void Player::Update(float dt)
 	if (isGrounded && InputMgr::GetKeyDown(sf::Keyboard::Up))
 	{
 		isGrounded = false;
-		//isStandAttack = false;
 		body.setTexture(TEXTURE_MGR.Get(texIdsJump)); 
 		body.setScale(0.5f, 0.5f); 
 		SetOrigin(Origins::MC); 
@@ -96,13 +101,6 @@ void Player::Update(float dt)
 		velocity.y = -1500.f; 
 	}
 
-	if (!isGrounded)
-	{
-		velocity += gravity * dt;
-		body.move(velocity * dt);
-	}
-	
-	/*attackinterval += dt;*/
 	if (!isStandAttack && InputMgr::GetKeyDown(sf::Keyboard::Z))
 	{
 		body.setTexture(TEXTURE_MGR.Get(texIdsJumpAttack) , true); // 텍스트 사이즈가 다 달라서 하나하나 불러올 때마다 true로 설정해줘야함.
@@ -123,26 +121,27 @@ void Player::Update(float dt)
 		isStandAttack = false;
 	}
 
-
-	if (isGrounded && InputMgr::GetKeyDown(sf::Keyboard::Down))
+	if (isattack)
 	{
-		//isGrounded = true;
-		//isStandAttack = false;
-		body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
-		body.setScale(0.5f, 0.5f);
-		SetOrigin(Origins::MC);
-		body.setPosition(body.getPosition().x, body.getPosition().y);
-	}
+		if (isGrounded && InputMgr::GetKeyDown(sf::Keyboard::Down))
+		{
+			body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
+			body.setScale(0.5f, 0.5f);
+			SetOrigin(Origins::MC);
+			body.setPosition(body.getPosition().x, body.getPosition().y);
+		}
 
-
-	if (!isStandDefense && InputMgr::GetKeyDown(sf::Keyboard::Down))
-	{
-		isStandDefense = true;
-		body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
-		body.setScale(0.5f, 0.5f);
-		SetOrigin(Origins::MC);
-		body.setPosition(body.getPosition().x, body.getPosition().y);
+		if (!isStandDefense && InputMgr::GetKeyDown(sf::Keyboard::Down))
+		{
+			isStandDefense = true;
+			body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
+			body.setScale(0.5f, 0.5f);
+			SetOrigin(Origins::MC);
+			body.setPosition(body.getPosition().x, body.getPosition().y);
+		}
 	}
+	
+
 	if (isStandDefense && InputMgr::GetKeyUp(sf::Keyboard::Down))
 	{
 		isStandDefense = false;
@@ -161,14 +160,25 @@ void Player::Update(float dt)
 			sf::FloatRect buildingBounds = building->GetHitBox().getGlobalBounds(); 
 			//std::cout << "xxxx" << std::endl; 
 
-
 			sf::Vector2f push = { 0.f, 150.f };
-
 
 			if (velocity.y < 0 && playerBounds.top < buildingBounds.height)
 			{
 				//velocity.y = 400;
 				velocity = building->SetVelocity(push);
+			}
+
+			if (Utils::CheckCollision(hitBox.rect, building->GetHitBox()))
+			{
+				if (InputMgr::GetKeyDown(sf::Keyboard::Down))
+				{
+					body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
+					body.setScale(0.5f, 0.5f);
+					SetOrigin(Origins::MC);
+					body.setPosition(body.getPosition().x, body.getPosition().y);
+					building->SetVelocity({0.f, -80.f});
+					velocity.y = 1200.f;
+				}
 			}
 		}
 	}
