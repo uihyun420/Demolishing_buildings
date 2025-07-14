@@ -70,7 +70,10 @@ void Player::Reset()
 }
 
 void Player::Update(float dt)
+
 {
+	attackinterval += dt;
+
 	hitBox.UpdateTransform(body, body.getLocalBounds());
 
 	if (body.getPosition().y >= 190.f)
@@ -158,13 +161,13 @@ void Player::Update(float dt)
 			sf::FloatRect buildingBounds = building->GetHitBox().getGlobalBounds(); 
 			//std::cout << "xxxx" << std::endl; 
 
-			if (velocity.y < 0 && playerBounds.top < buildingBounds.top + buildingBounds.height)
+			if (velocity.y < 0 && playerBounds.top < buildingBounds.height)
 			{
-				velocity.y = 500; // 꼼수
+				velocity.y = 400;
 
 				// 플레이어와 건물이 아예 안겹치도록 해야함 건물과 플레이어의 히트박스가 닿았을 때 건물이 플레이어를 밀어내도록 
 				//body.setPosition(body.getPosition().x, (buildingBounds.top + buildingBounds.height)-playerBounds.top); 이건 셋포지션이라 그 자리로 순간이동 되는거 같음 
-				// 실시간으로 계속 업데이트 해야함 		
+				// 실시간으로 계속 업데이트 하고싶음 		
 
 			}
 		}

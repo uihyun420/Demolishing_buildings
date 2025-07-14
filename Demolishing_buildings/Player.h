@@ -26,7 +26,7 @@ protected:
 
 
 	int attack = 0;
-	float attackinterval = 0.2f;
+	float attackinterval = 10.f;
 	float hitinterval = 1.f;
 	int hp = 100;
 
@@ -51,5 +51,6 @@ public:
 
 	//bool PlayerJump();
 	void SetBuilding(Building* b) { building = b; } 
+	
 };
 
