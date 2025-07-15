@@ -46,6 +46,7 @@ void Player::SetOrigin(Origins preset)
 
 void Player::Init()
 {
+
 }
 
 void Player::Release()
@@ -57,10 +58,7 @@ void Player::Reset()
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 1;
 
-	attackinterval = 0.2f;
-
 	body.setTexture(TEXTURE_MGR.Get(texIds), true);
-	//body.setTexture(TEXTURE_MGR.Get(texIdsJumpAttack));
 	body.setPosition(0.f, 190.f);
 	body.setScale(0.5f, 0.5f);
 	SetOrigin(Origins::BC);
@@ -68,6 +66,9 @@ void Player::Reset()
 	isAttack = false;
 	isDefense = false;
 
+	hp = 300;
+	attack = 50;
+	attackinterval = 1.f;
 }
 
 void Player::Update(float dt)
@@ -123,7 +124,6 @@ void Player::Update(float dt)
 
 	if (isAttack && InputMgr::GetKeyUp(sf::Keyboard::Z))
 	{
-		attackinterval = 1.f;
 		body.setTexture(TEXTURE_MGR.Get(texIds), true);
 		body.setScale(0.5f, 0.5f);
 		SetOrigin(Origins::MC);
@@ -176,8 +176,14 @@ void Player::Update(float dt)
 					body.setScale(0.5f, 0.5f);
 					SetOrigin(Origins::MC);
 					body.setPosition(body.getPosition().x, body.getPosition().y);
-					building->SetVelocity({ 0.f, -80.f });
+					building->SetVelocity({ 0.f, -300.f });
 					velocity.y = 1200.f;
+				}
+
+				if (InputMgr::GetKeyDown(sf::Keyboard::Z) && isAttack && attackinterval >= 0.5)
+				{
+					attackinterval = 1.0f;
+					building->TakeDamage(attack);
 				}
 			}
 		}
@@ -193,7 +199,3 @@ void Player::Draw(sf::RenderWindow& window)
 	hitBox.Draw(window);
 }
 
-//bool Player::PlayerJump()
-//{
-//	return !isGrounded;
-//}

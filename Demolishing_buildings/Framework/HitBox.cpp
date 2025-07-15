@@ -25,3 +25,5 @@ void HitBox::Draw(sf::RenderWindow& window)
 		window.draw(rect);
 	}
 }
+
+

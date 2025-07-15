@@ -26,7 +26,7 @@ protected:
 	float speed = 1000.f;
 
 
-	int attack = 10;
+	int attack = 0;
 	float attackinterval = 0.5f;
 	float hitinterval = 1.f;
 	int hp = 100;
@@ -50,7 +50,7 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 
-	//bool PlayerJump();
+	
 	void SetBuilding(Building* b) { building = b; } 
 	
 };

@@ -67,21 +67,13 @@ void SceneGame::Update(float dt)
 	background->Update(dt); 
 	building->Update(dt);
 	worldView.setCenter(player->GetPosition().x, player->GetPosition().y); // 플레이어 위치에 따라 뷰 이동
-	
+
+
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
 	{
 		SCENE_MGR.ChangeScene(SceneIds::Game);
 	}
-
-	//if (player->PlayerJump())
-	//{
-	//	worldView.setCenter(player->GetPosition().x, player->GetPosition().y);
-	//}
-	//else
-	//{
-	//	worldView.setCenter(0.f, 0.f); 	
-	//}
 
 	Scene::Update(dt);
 }

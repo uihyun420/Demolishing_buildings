@@ -8,12 +8,23 @@ protected:
 	sf::Sprite building;
 	std::string texIds = "graphics/building.png";
 
+	sf::Sprite buildingbreak01;
+	sf::Sprite buildingbreak02;
+	sf::Sprite buildingbreak03;
+	sf::Sprite buildingbreak04;
+
+	std::string breaktexIds01 = "graphics/buildingbreak01.png";
+	std::string breaktexIds02 = "graphics/buildingbreak02.png";
+	std::string breaktexIds03 = "graphics/buildingbreak03.png";
+	std::string breaktexIds04 = "graphics/buildingbreak04.png";
+
 	sf::Vector2f gravity = { 0.f, 150.f };
 	sf::Vector2f velocity = { 0.f, 0.f }; 
 	bool isGrounded = false;
 
 	int attack = 0;
-	int hp = 500;
+	int hp = 0;
+
 
 	HitBox hitBox;
 
@@ -44,6 +55,12 @@ public:
 	const sf::RectangleShape& GetHitBox() const;
 
 	sf::Vector2f SetVelocity(const sf::Vector2f& vel) { return velocity = vel; }
+
+	void TakeDamage(int damage);
+
+	void Destroy();
+
+
 
 };
 
