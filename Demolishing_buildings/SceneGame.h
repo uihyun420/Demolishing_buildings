@@ -6,6 +6,7 @@ class BackGround;
 class Building;
 class Ground;
 class Sky;
+class Debris;
 
 
 class SceneGame : public Scene
@@ -16,6 +17,7 @@ protected:
 	Building* building;
 	Ground* ground;
 	Sky* sky;
+	Debris* debris;
 
 
 	//bool isGrounded = false;

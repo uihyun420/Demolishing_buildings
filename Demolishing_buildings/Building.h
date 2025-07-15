@@ -1,9 +1,10 @@
 #pragma once
 #include "GameObject.h"
 #include "HitBox.h"
+#include "Debris.h"
 
 class Player;
-class BuildingBreak01;
+class Debris;
 class Building : public GameObject
 {
 protected:
@@ -19,7 +20,7 @@ protected:
 
 
 	HitBox hitBox;
-	BuildingBreak01* buildingbreak01;
+	Debris* debris;
 	Player* player;
 
 public:
@@ -53,7 +54,7 @@ public:
 	void TakeDamage(int damage);
 	void Destroy();
 	void SetPlayer(Player* p) { player = p; }
-
+	void SetDebris(Debris* d) { debris = d; }
 
 	
 	

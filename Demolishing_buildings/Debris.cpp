@@ -1,43 +1,11 @@
 #include "stdafx.h"
 #include "Debris.h"
+ 
 
 
 	Debris::Debris(const std::string & name)
 		: GameObject(name)
 	{
-	}
-
-	void Debris::SetPosition(const sf::Vector2f & pos)
-	{
-		GameObject::SetPosition(pos);
-		debris.setPosition(pos);
-	}
-
-	void Debris::SetRotation(float rot)
-	{
-		GameObject::SetRotation(rot);
-		debris.setRotation(rot);
-	}
-
-	void Debris::SetScale(const sf::Vector2f & s)
-	{
-		GameObject::SetScale(s);
-		debris.setScale(s);
-	}
-
-	void Debris::SetOrigin(const sf::Vector2f & o)
-	{
-		GameObject::SetOrigin(o);
-		debris.setOrigin(o);
-	}
-
-	void Debris::SetOrigin(Origins preset)
-	{
-		GameObject::SetOrigin(preset);
-		if (preset != Origins::Custom)
-		{
-			Utils::SetOrigin(debris, preset);
-		}
 	}
 
 	void Debris::Init()
@@ -54,9 +22,39 @@
 
 	void Debris::Update(float dt)
 	{
+		for (size_t i = 0; i < debris.size(); ++i)
+		{
+			velocity[i] += gravity * dt;
+			debris[i].move(velocity[i] * dt);
+		}
 	}
 
 	void Debris::Draw(sf::RenderWindow & window)
 	{
-		window.draw(debris);
+		for (const auto& d : debris)
+		{
+			window.draw(d);
+		}
+	}
+
+	void Debris::SpawnDebris(const sf::Vector2f& pos, int count)
+	{
+		debris.clear();
+		velocity.clear();
+
+		float space = 50.f;
+		float startX = pos.x - (space * (count - 1) / 2.f);
+
+		for (int i = 0; i < count; ++i)
+		{
+			sf::Sprite d;
+			int texIdx = i % debrisTexIdsList.size();
+			d.setTexture(TEXTURE_MGR.Get(debrisTexIdsList[texIdx]), true);
+			d.setPosition(startX + i * space, pos.y);
+			debris.push_back(d);
+
+			float vx = (i - (count - 1) / 2.f) * 100.f; // -150, -50, 50, 150 µî
+			velocity.push_back({ vx, 0.f });
+			//velocity.push_back({ 0.f, 0.f });
+		}
 	}

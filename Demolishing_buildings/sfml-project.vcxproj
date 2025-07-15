@@ -142,6 +142,7 @@
   <ItemGroup>
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Building.cpp" />
+    <ClCompile Include="Debris.cpp" />
     <ClCompile Include="Framework\AnimationClip.cpp" />
     <ClCompile Include="Framework\Animator.cpp" />
     <ClCompile Include="AniPlayer.cpp" />
@@ -170,6 +171,7 @@
   <ItemGroup>
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Building.h" />
+    <ClInclude Include="Debris.h" />
     <ClInclude Include="Framework\AnimationClip.h" />
     <ClInclude Include="Framework\Animator.h" />
     <ClInclude Include="AniPlayer.h" />

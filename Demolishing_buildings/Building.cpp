@@ -2,6 +2,7 @@
 #include "Building.h"
 #include "HitBox.h"
 #include "Player.h"
+#include "Debris.h"
 
 Building::Building(const std::string& name)
 	:GameObject(name)
@@ -120,5 +121,9 @@ void Building::TakeDamage(int attack)
 void Building::Destroy()
 {
 	SetActive(false);
+	if (debris)
+	{
+		debris->SpawnDebris(building.getPosition(), 4);
+	}
 }
 

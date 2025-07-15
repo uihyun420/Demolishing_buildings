@@ -3,18 +3,22 @@
 class Debris : public GameObject
 {
 protected:
-	std::list<sf::Sprite*> debris;
-	std::string debristexIds;
+	std::vector<sf::Sprite> debris;
+	std::string debrisTexIds;
 
+	std::vector<sf::Vector2f> velocity;
+	sf::Vector2f gravity = { 0.f, 500.f };
+
+	std::vector<std::string> debrisTexIdsList = 
+	{
+		"graphics/buildingbreak01.png",
+		"graphics/buildingbreak02.png",
+		"graphics/buildingbreak03.png",
+		"graphics/buildingbreak04.png"
+	};
 public:
 	Debris(const std::string& name = "");
 	virtual ~Debris() = default;
-
-	void SetPosition(const sf::Vector2f& pos) override;
-	void SetRotation(float rot) override;
-	void SetScale(const sf::Vector2f& s) override;
-	void SetOrigin(const sf::Vector2f& o) override;
-	void SetOrigin(Origins preset) override;
 
 	void Init() override;
 	void Release() override;
@@ -22,7 +26,6 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 
+	void SpawnDebris(const sf::Vector2f& pos, int count);
 };
 
-// 건물 잔해들을 리스트 or 배열에 담고 
-// 포지션을 각각 준다음 building SetActive = false 일때 그 자리에 랜덤으로 생성되어 중력 적용 해서 떨어지도록 하기 
