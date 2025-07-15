@@ -1,8 +1,9 @@
 #pragma once
 #include "GameObject.h"
 #include "HitBox.h"
+
+class Player;
 class BuildingBreak01;
-class Animator;
 class Building :  public GameObject
 {
 protected:
@@ -16,9 +17,10 @@ protected:
 	int attack = 0;
 	int hp = 0;
 
-	Animator* animator;
+
 	HitBox hitBox;
 	BuildingBreak01* buildingbreak01;
+	Player* player;
 
 public:
 	
@@ -49,8 +51,12 @@ public:
 	sf::Vector2f SetVelocity(const sf::Vector2f& vel) { return velocity = vel; }
 
 	void TakeDamage(int damage);
-
 	void Destroy();
+	void SetPlayer(Player* p) { player = p; }
+
+
 	void SetBuildingBreak01(BuildingBreak01* b) { buildingbreak01 = b; }
+	
+
 };
 

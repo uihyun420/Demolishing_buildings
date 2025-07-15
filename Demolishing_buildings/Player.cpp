@@ -64,6 +64,7 @@ void Player::Reset()
 	body.setPosition(0.f, 190.f);
 	body.setScale(0.5f, 0.5f);
 	SetOrigin(Origins::BC);
+	SetActive(true);
 	isGrounded = true;
 	isAttack = false;
 	isDefense = false;

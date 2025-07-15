@@ -48,5 +48,6 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 	
 	void SetBuilding(Building* b) { building = b; } 
+
 };
 

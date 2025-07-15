@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Building.h"
 #include "HitBox.h"
-#include "BuildingBreak01.h"
+#include "Player.h"
 
 
 Building::Building(const std::string& name)
@@ -62,7 +62,7 @@ void Building::Reset()
 	SetActive(true);
 	
 	hp = 1000;
-	attack = 100;
+	attack = 1000;
 }
 
 void Building::Update(float dt)
@@ -80,6 +80,7 @@ void Building::Update(float dt)
 		velocity.y = 0.f; 
 		isGrounded = true;
 	}
+
 
 	building.setPosition(building.getPosition().x, building.getPosition().y);
 
@@ -103,17 +104,11 @@ void Building::TakeDamage(int damage)
 	{
 		hp = 0;
 		Destroy();
-
 	}
 }
 
 void Building::Destroy()
 {
 	SetActive(false);
-	buildingbreak01 = new BuildingBreak01("break01");
-	for (int i = 0; i < 3; ++i)
-	{
-		buildingbreak01[i].SetPosition(building.getPosition());
-	}
 }
 
