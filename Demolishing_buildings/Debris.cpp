@@ -48,7 +48,7 @@
 		for (int i = 0; i < count; ++i)
 		{
 			sf::Sprite d;
-			int texIdx = i % debrisTexIdsList.size();
+			int texIdx = i % debrisTexIdsList.size(); 
 			d.setTexture(TEXTURE_MGR.Get(debrisTexIdsList[texIdx]), true);
 			d.setPosition(startX + i * space, pos.y);
 			debris.push_back(d);

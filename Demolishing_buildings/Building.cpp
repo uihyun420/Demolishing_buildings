@@ -67,6 +67,8 @@ void Building::Reset()
 
 void Building::Update(float dt)
 {
+	if (!GetActive()) return; // 활성화되지 않은 경우 업데이트하지 않음
+
 	hitBox.UpdateTransform(building, building.getLocalBounds());
 
 	if (!isGrounded)  
@@ -121,6 +123,8 @@ void Building::TakeDamage(int attack)
 void Building::Destroy()
 {
 	SetActive(false);
+	//hitBox.rect.setSize({ 0.f, 0.f });
+	//hitBox.isActive = false;
 	if (debris)
 	{
 		debris->SpawnDebris(building.getPosition(), 4);
