@@ -32,8 +32,8 @@ void SceneGame::Init()
 	
 	
 	player->SetBuilding(building); // 플레이어와 빌딩 연결해야 충돌검사 등 진행
-	
 	building->SetPlayer(player);
+
 
 	AddGameObject(player);
 	AddGameObject(background);

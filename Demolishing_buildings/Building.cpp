@@ -83,20 +83,18 @@ void Building::Update(float dt)
 
 	if (Utils::CheckCollision(hitBox.rect, player->GetHitBox()))
 	{
-		sf::FloatRect playerBounds = hitBox.rect.getGlobalBounds();
-		sf::FloatRect buildingBounds = player->GetHitBox().getGlobalBounds();
-		//std::cout << "xxxx" << std::endl; 
+		sf::FloatRect buildingBounds = hitBox.rect.getGlobalBounds();
+		sf::FloatRect playerBounds = player->GetHitBox().getGlobalBounds();
 
-		//sf::Vector2f push = { 0.f, 150.f };
 
-		if (velocity.y < 0 && buildingBounds.height < playerBounds.top )
+		if ((buildingBounds.top + buildingBounds.height) > 190 )
 		{
 			player->TakeDamage(attack);
 		}
 	}
 	building.setPosition(building.getPosition().x, building.getPosition().y);
-
 }
+
 
 void Building::Draw(sf::RenderWindow& window)
 {
@@ -109,9 +107,9 @@ const sf::RectangleShape& Building::GetHitBox() const
 	return hitBox.rect;
 }
 
-void Building::TakeDamage(int damage)
+void Building::TakeDamage(int attack)
 {
-	hp -= damage;
+	hp -= attack;
 	if (hp <= 0)
 	{
 		hp = 0;

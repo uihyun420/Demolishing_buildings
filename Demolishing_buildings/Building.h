@@ -55,7 +55,7 @@ public:
 	void SetPlayer(Player* p) { player = p; }
 
 
-	void SetBuildingBreak01(BuildingBreak01* b) { buildingbreak01 = b; }
+	
 	
 
 };
