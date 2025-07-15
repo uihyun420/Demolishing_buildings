@@ -4,10 +4,21 @@
 class Debris : public GameObject
 {
 protected:
-	std::vector<sf::Sprite> debris;
-	std::string debiristexIds;
+	sf::Sprite debris;
+	std::string debristexIds;
 
 public:
+
+	enum class Types
+	{
+		Debris1,
+		Debris2,
+		Debris3,
+		Debris4,
+		TypeCount,
+	};
+
+
 	Debris(const std::string& name = "");
 	virtual ~Debris() = default;
 
@@ -22,5 +33,7 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+
+	void SetType(Types type);
 };
 
