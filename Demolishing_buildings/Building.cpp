@@ -3,7 +3,6 @@
 #include "HitBox.h"
 #include "Player.h"
 
-
 Building::Building(const std::string& name)
 	:GameObject(name)
 {
@@ -82,6 +81,19 @@ void Building::Update(float dt)
 	}
 
 
+	if (Utils::CheckCollision(hitBox.rect, player->GetHitBox()))
+	{
+		sf::FloatRect playerBounds = hitBox.rect.getGlobalBounds();
+		sf::FloatRect buildingBounds = player->GetHitBox().getGlobalBounds();
+		//std::cout << "xxxx" << std::endl; 
+
+		//sf::Vector2f push = { 0.f, 150.f };
+
+		if (velocity.y < 0 && buildingBounds.height < playerBounds.top )
+		{
+			player->TakeDamage(attack);
+		}
+	}
 	building.setPosition(building.getPosition().x, building.getPosition().y);
 
 }

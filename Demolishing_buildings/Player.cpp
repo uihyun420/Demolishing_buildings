@@ -4,9 +4,6 @@
 #include "Building.h"
 #include "Utils.h"
 
-
-
-
 Player::Player(const std::string& name)
 	: GameObject(name)
 {
@@ -202,3 +199,22 @@ void Player::Draw(sf::RenderWindow& window)
 	hitBox.Draw(window);
 }
 
+const sf::RectangleShape& Player::GetHitBox() const
+{
+	return hitBox.rect;
+}
+
+void Player::TakeDamage(int damage)
+{
+	hp -= damage;
+	if (hp <= 0)
+	{
+		hp = 0;
+		Die();
+	}
+}
+
+void Player::Die()
+{
+	SetActive(false);
+}

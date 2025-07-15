@@ -41,6 +41,8 @@ public:
 	void SetOrigin(const sf::Vector2f& o) override;
 	void SetOrigin(Origins preset) override;
 
+	const sf::RectangleShape& GetHitBox() const;
+
 	void Init() override;
 	void Release() override;
 	void Reset() override;
@@ -49,5 +51,8 @@ public:
 	
 	void SetBuilding(Building* b) { building = b; } 
 
+
+	void TakeDamage(int damage);
+	void Die();
 };
 
