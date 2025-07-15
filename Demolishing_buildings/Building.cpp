@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Building.h"
 #include "HitBox.h"
+#include "BuildingBreak01.h"
 
 
 Building::Building(const std::string& name)
@@ -41,8 +42,6 @@ void Building::SetOrigin(Origins preset)
 	}
 }
 
-
-
 void Building::Init()
 {
 }
@@ -61,12 +60,7 @@ void Building::Reset()
 	isGrounded = false;
 	SetOrigin(Origins::MC);
 	SetActive(true);
-
-	buildingbreak01.setTexture(TEXTURE_MGR.Get(breaktexIds01));
-	buildingbreak02.setTexture(TEXTURE_MGR.Get(breaktexIds02));
-	buildingbreak03.setTexture(TEXTURE_MGR.Get(breaktexIds03));
-	buildingbreak04.setTexture(TEXTURE_MGR.Get(breaktexIds04));
-
+	
 	hp = 1000;
 	attack = 100;
 }
@@ -94,10 +88,6 @@ void Building::Update(float dt)
 void Building::Draw(sf::RenderWindow& window)
 {
 	window.draw(building);
-	window.draw(buildingbreak01);
-	window.draw(buildingbreak02);
-	window.draw(buildingbreak03);
-	window.draw(buildingbreak04);
 	hitBox.Draw(window);
 }
 
@@ -113,21 +103,17 @@ void Building::TakeDamage(int damage)
 	{
 		hp = 0;
 		Destroy();
+
 	}
 }
 
 void Building::Destroy()
 {
 	SetActive(false);
-	buildingbreak01.setTexture(TEXTURE_MGR.Get(breaktexIds01));
-	buildingbreak02.setTexture(TEXTURE_MGR.Get(breaktexIds02));
-	buildingbreak03.setTexture(TEXTURE_MGR.Get(breaktexIds03));
-	buildingbreak04.setTexture(TEXTURE_MGR.Get(breaktexIds04));
-
-	buildingbreak01.setPosition(0.f, building.getPosition().y);
-	buildingbreak01.setScale(0.8f, 0.8f);
-	isGrounded = false;
-	SetOrigin(Origins::MC);
-
-
+	buildingbreak01 = new BuildingBreak01("break01");
+	for (int i = 0; i < 3; ++i)
+	{
+		buildingbreak01[i].SetPosition(building.getPosition());
+	}
 }
+

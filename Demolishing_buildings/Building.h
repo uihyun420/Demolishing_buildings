@@ -1,22 +1,13 @@
 #pragma once
 #include "GameObject.h"
 #include "HitBox.h"
-
+class BuildingBreak01;
+class Animator;
 class Building :  public GameObject
 {
 protected:
 	sf::Sprite building;
 	std::string texIds = "graphics/building.png";
-
-	sf::Sprite buildingbreak01;
-	sf::Sprite buildingbreak02;
-	sf::Sprite buildingbreak03;
-	sf::Sprite buildingbreak04;
-
-	std::string breaktexIds01 = "graphics/buildingbreak01.png";
-	std::string breaktexIds02 = "graphics/buildingbreak02.png";
-	std::string breaktexIds03 = "graphics/buildingbreak03.png";
-	std::string breaktexIds04 = "graphics/buildingbreak04.png";
 
 	sf::Vector2f gravity = { 0.f, 150.f };
 	sf::Vector2f velocity = { 0.f, 0.f }; 
@@ -25,8 +16,9 @@ protected:
 	int attack = 0;
 	int hp = 0;
 
-
+	Animator* animator;
 	HitBox hitBox;
+	BuildingBreak01* buildingbreak01;
 
 public:
 	
@@ -59,8 +51,6 @@ public:
 	void TakeDamage(int damage);
 
 	void Destroy();
-
-
-
+	void SetBuildingBreak01(BuildingBreak01* b) { buildingbreak01 = b; }
 };
 

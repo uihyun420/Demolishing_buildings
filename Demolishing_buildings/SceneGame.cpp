@@ -6,6 +6,8 @@
 #include "Building.h"
 #include "Ground.h"
 #include "Sky.h"
+#include "BuildingBreak01.h"
+
 
 SceneGame::SceneGame()
 	:Scene(SceneIds::Game)
@@ -23,21 +25,25 @@ void SceneGame::Init()
 	texIds.push_back("graphics/standattack.png");
 	texIds.push_back("graphics/jumpattack.png");
 	texIds.push_back("graphics/standguard.png");
+	texIds.push_back("graphics/buildingbreak01.png");
 
-	
+
 	player = new Player("Player");
 	background = new BackGround("background");
 	building = new Building("building"); 
 	ground = new Ground("ground");
 	sky = new Sky("sky");
+	buildingbreak01 = new BuildingBreak01("break01");
 	
 	player->SetBuilding(building); // 플레이어와 빌딩 연결해야 충돌검사 등 진행
+	building->SetBuildingBreak01(buildingbreak01);
 
 	AddGameObject(player);
 	AddGameObject(background);
 	AddGameObject(building); 
 	AddGameObject(ground);
 	AddGameObject(sky);
+	AddGameObject(buildingbreak01);
 
 	Scene::Init();
 }
@@ -66,6 +72,8 @@ void SceneGame::Update(float dt)
 	player->Update(dt);
 	background->Update(dt); 
 	building->Update(dt);
+	buildingbreak01->Update(dt);
+
 	worldView.setCenter(player->GetPosition().x, player->GetPosition().y); // 플레이어 위치에 따라 뷰 이동
 
 
