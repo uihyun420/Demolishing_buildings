@@ -4,7 +4,7 @@
 
 class Player;
 class BuildingBreak01;
-class Building :  public GameObject
+class Building : public GameObject
 {
 protected:
 	sf::Sprite building;
