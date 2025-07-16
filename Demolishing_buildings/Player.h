@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "HitBox.h"
+
 class Building;
 class StaminaBar;
 
@@ -68,6 +69,7 @@ public:
 	void TakeDamage(int damage);
 	void Die();
 
+	void SetStaminaBarGage(StaminaBar* staminabar);
 	void SetStamina(StaminaBar* s) { staminabar = s; }
 };
 

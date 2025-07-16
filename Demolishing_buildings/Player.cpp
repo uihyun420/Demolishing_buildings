@@ -46,6 +46,8 @@ void Player::SetOrigin(Origins preset)
 
 void Player::Init()
 {
+	sortingLayer = SortingLayers::Foreground;
+	sortingOrder = 1;
 
 }
 
@@ -189,6 +191,7 @@ void Player::Update(float dt)
 			body.setTexture(TEXTURE_MGR.Get(texIds), true);
 			BodyReset();
 		}
+		staminabar->SetValue(stamina , 100);
 	}
 
 	if (!isDefense)
@@ -203,6 +206,7 @@ void Player::Update(float dt)
 				stamina = maxstamina;
 			}
 		}
+		staminabar->SetValue(stamina, 100);
 	}
 
 
@@ -252,4 +256,10 @@ void Player::Die()
 {
 	SetActive(false);
 }
+
+void Player::SetStaminaBarGage(StaminaBar* staminabar)
+	{
+		this->staminabar = staminabar;
+	}
+
 

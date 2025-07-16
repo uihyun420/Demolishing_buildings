@@ -43,7 +43,7 @@ void StaminaBar::SetOrigin(Origins preset)
 
 void StaminaBar::Init()
 {
-	initSize = { 400.f, 80.f };
+	initSize = { 300.f, 50.f };
 	sortingLayer = (SortingLayers::UI);
 	sortingOrder = 0;
 	SetOrigin(Origins::MC);
@@ -71,7 +71,7 @@ void StaminaBar::Draw(sf::RenderWindow& window)
 	window.draw(staminaBar);
 }
 
-void StaminaBar::SetStaminaBarGage(float stamina, float maxstamina) // 플레이어가 얘를 사용하게 하려면
+void StaminaBar::SetValue(float stamina, float maxstamina) //  함수이름 똑같이 쓰지마라 
 {
-	staminaBar.setSize({ initSize.x * (stamina / (float)maxstamina) , initSize.y });
+	staminaBar.setSize({ initSize.x * (stamina / maxstamina) , initSize.y });
 }
