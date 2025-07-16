@@ -90,6 +90,15 @@
     <ClCompile Include="Debris.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="StaminaBar.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreText.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="UiScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\InputMgr.h">
@@ -174,6 +183,15 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Debris.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="StaminaBar.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreText.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="UiScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

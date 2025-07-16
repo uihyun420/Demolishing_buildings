@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "HitBox.h"
 class Building;
-
+class StaminaBar;
 
 class Player : public GameObject
 {
@@ -41,6 +41,7 @@ protected:
 
 	HitBox hitBox;
 	Building* building;
+	StaminaBar* staminabar;
 
 public:
 	Player(const std::string& name = "");
@@ -61,7 +62,6 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 	
 	void SetBuilding(Building* b) { building = b; } 
-
 	void BodyReset();
 
 	void TakeDamage(int damage);

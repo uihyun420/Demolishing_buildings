@@ -160,13 +160,16 @@
     <ClCompile Include="Scenes\SceneDev2.cpp" />
     <ClCompile Include="Framework\SceneMgr.cpp" />
     <ClCompile Include="Framework\SoundMgr.cpp" />
+    <ClCompile Include="ScoreText.cpp" />
     <ClCompile Include="Sky.cpp" />
+    <ClCompile Include="StaminaBar.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Framework\TextGo.cpp" />
     <ClCompile Include="Framework\Utils.cpp" />
     <ClCompile Include="Framework\Variables.cpp" />
+    <ClCompile Include="UiScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackGround.h" />
@@ -192,11 +195,14 @@
     <ClInclude Include="Scenes\SceneDev2.h" />
     <ClInclude Include="Framework\SceneMgr.h" />
     <ClInclude Include="Framework\SoundMgr.h" />
+    <ClInclude Include="ScoreText.h" />
     <ClInclude Include="Sky.h" />
+    <ClInclude Include="StaminaBar.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Framework\TextGo.h" />
     <ClInclude Include="Framework\Utils.h" />
     <ClInclude Include="Framework\Variables.h" />
+    <ClInclude Include="UiScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

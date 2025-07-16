@@ -7,6 +7,8 @@ class Building;
 class Ground;
 class Sky;
 class Debris;
+class StaminaBar;
+class ScoreText;
 
 
 class SceneGame : public Scene
@@ -18,7 +20,8 @@ protected:
 	Ground* ground;
 	Sky* sky;
 	Debris* debris;
-
+	StaminaBar* staminabar;
+	ScoreText* scoreText;
 
 	//bool isGrounded = false;
 

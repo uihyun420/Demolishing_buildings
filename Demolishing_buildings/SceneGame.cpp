@@ -7,6 +7,9 @@
 #include "Ground.h"
 #include "Sky.h"
 #include "Debris.h"
+#include "StaminaBar.h"
+#include "UiScene.h"
+#include "ScoreText.h"
 
 SceneGame::SceneGame()
 	:Scene(SceneIds::Game)
@@ -15,6 +18,8 @@ SceneGame::SceneGame()
 
 void SceneGame::Init()
 {
+	fontIds.push_back("fonts/Galmuri11-Bold.ttf");
+
 	texIds.push_back("graphics/bg.png");
 	texIds.push_back("graphics/ground.png");
 	texIds.push_back("graphics/sky.png");
@@ -35,11 +40,18 @@ void SceneGame::Init()
 	ground = new Ground("ground");
 	sky = new Sky("sky");
 	debris = new Debris("debris");
+	staminabar = new StaminaBar("staminabar");
+	scoreText = new ScoreText("scoreText");
+
 	
 	
 	player->SetBuilding(building); // 플레이어와 빌딩 연결해야 충돌검사 등 진행
+	
+
 	building->SetPlayer(player);
 	building->SetDebris(debris);
+
+	scoreText->SetScore(0);
 
 	AddGameObject(player);
 	AddGameObject(background);
@@ -47,6 +59,7 @@ void SceneGame::Init()
 	AddGameObject(ground);
 	AddGameObject(sky);
 	AddGameObject(debris);
+	AddGameObject(scoreText);
 
 	Scene::Init();
 }
@@ -56,11 +69,13 @@ void SceneGame::Enter()
 	sf::Vector2f center{ size.x * 0.5f, size.y * 0.5f }; // 중앙 위치 계산
 
 	// 뷰 설정
-	uiView.setSize(size);
-	uiView.setCenter(center);
+	//uiView.setSize(size);
+	//uiView.setCenter(center);
 	worldView.setSize(size);
 	worldView.setCenter(player->GetPosition().x, player ->GetPosition().y);
 
+	uiView.setSize({ FRAMEWORK.GetWindowSizeF().x, FRAMEWORK.GetWindowSizeF().y });
+	uiView.setCenter({ FRAMEWORK.GetWindowSizeF().x / 2, FRAMEWORK.GetWindowSizeF().y / 2 });
 	Scene::Enter();
 }
 
@@ -72,11 +87,6 @@ void SceneGame::Exit()
 
 void SceneGame::Update(float dt)
 {
-	player->Update(dt);
-	background->Update(dt); 
-	building->Update(dt);
-	debris->Update(dt);
-	
 
 	worldView.setCenter(player->GetPosition().x, player->GetPosition().y); // 플레이어 위치에 따라 뷰 이동
 
@@ -90,4 +100,5 @@ void SceneGame::Update(float dt)
 void SceneGame::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
+	
 }
