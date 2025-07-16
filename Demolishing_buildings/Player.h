@@ -28,6 +28,17 @@ protected:
 	float hitinterval = 1.f;
 	int hp = 100;
 
+
+	float stamina = 100.f;
+	float maxstamina = 100.f;
+	int score = 0;
+
+	float staminaDecrease = 30.f;
+	float staminaRicovery = 20.f;
+
+	bool canDefense = true;
+
+
 	HitBox hitBox;
 	Building* building;
 
@@ -50,7 +61,6 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 	
 	void SetBuilding(Building* b) { building = b; } 
-
 
 	void TakeDamage(int damage);
 	void Die();

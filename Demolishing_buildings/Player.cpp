@@ -69,6 +69,13 @@ void Player::Reset()
 	hp = 300;
 	attack = 50;
 	attackinterval = 1.f;
+
+	float stamina = 100.f;
+	float maxstamina = 100.f;
+	int score = 0;
+
+	float staminaDecrease = 30.f;
+	float staminaRicovery = 20.f;
 }
 
 void Player::Update(float dt)
@@ -132,23 +139,9 @@ void Player::Update(float dt)
 	}
 
 
-	if (!isDefense && InputMgr::GetKeyDown(sf::Keyboard::Down))
-	{
-		isDefense = true;
-		body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
-		body.setScale(0.5f, 0.5f);
-		SetOrigin(Origins::MC);
-		body.setPosition(body.getPosition().x, body.getPosition().y);
-	}
 
-	if (isDefense && InputMgr::GetKeyUp(sf::Keyboard::Down))
-	{
-		isDefense = false;
-		body.setTexture(TEXTURE_MGR.Get(texIds), true);
-		body.setScale(0.5f, 0.5f);
-		SetOrigin(Origins::MC);
-		body.setPosition(body.getPosition().x, body.getPosition().y);
-	}
+
+
 
 
 	if (building) // 빌딩 객체가 설정되어 있는 경우에만 충돌 검사 진행
@@ -180,7 +173,7 @@ void Player::Update(float dt)
 					velocity.y = 1200.f;
 				}
 
-				if (InputMgr::GetKeyDown(sf::Keyboard::Z) && isAttack && attackinterval >= 0.5)
+				if (InputMgr::GetKeyDown(sf::Keyboard::Z) && isAttack && attackinterval >= 0.5f)
 				{
 					attackinterval = 1.0f;
 					building->TakeDamage(attack);
@@ -189,8 +182,62 @@ void Player::Update(float dt)
 		}
 	}
 
+
+	if (!isDefense && stamina <= maxstamina) // 방어 상태가 아니고 스테미너가 max 스테미너보다 작다면 스테미너 회복
+	{
+		stamina += staminaRicovery * dt;
+		if (stamina > maxstamina)
+		{
+			stamina = maxstamina;
+		}
+	}
+
+
+
+	if(isDefense && InputMgr::GetKeyDown(sf::Keyboard::Down) && stamina <= maxstamina) // 방어상태이고 아래키 누르고 스테미너가 max스테미너보다 작으면 스테미너 감소 시키고 0이되면 텍스처 변경
+	{
+		stamina -= staminaDecrease * dt;
+		if (stamina < 0.f)
+		{
+			stamina = 0.f;
+			canDefense = false;
+			isDefense = false;
+			body.setTexture(TEXTURE_MGR.Get(texIds), true);
+			body.setScale(0.5f, 0.5f);
+			body.setPosition(body.getPosition().x, body.getPosition().y);
+			SetOrigin(Origins::MC);
+		}
+	}
+
+
+	if (isDefense && canDefense && InputMgr::GetKeyUp(sf::Keyboard::Down))  
+	{
+		isDefense = false;
+		body.setTexture(TEXTURE_MGR.Get(texIds), true);
+		body.setScale(0.5f, 0.5f);
+		SetOrigin(Origins::MC);
+		body.setPosition(body.getPosition().x, body.getPosition().y);
+	}
+
+
+
+	if (!isDefense && canDefense && InputMgr::GetKeyDown(sf::Keyboard::Down)) // 방어상태가 아니고 방어 할 수 있고 다운키를 누르면 
+	{
+		isDefense = true;
+		body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
+		body.setScale(0.5f, 0.5f);
+		SetOrigin(Origins::MC);
+		body.setPosition(body.getPosition().x, body.getPosition().y);
+	}
+
+
 	SetPosition(body.getPosition());
 }
+
+
+
+
+
 
 
 void Player::Draw(sf::RenderWindow& window)

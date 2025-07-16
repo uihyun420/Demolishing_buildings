@@ -39,9 +39,6 @@
 
 	void Debris::SpawnDebris(const sf::Vector2f& pos, int count)
 	{
-		debris.clear();
-		velocity.clear();
-
 		float space = 50.f;
 		float startX = pos.x - (space * (count - 1) / 2.f);
 
@@ -55,6 +52,6 @@
 
 			float vx = (i - (count - 1) / 2.f) * 100.f; // -150, -50, 50, 150 µî
 			velocity.push_back({ vx, 0.f });
-			//velocity.push_back({ 0.f, 0.f });
+
 		}
 	}
