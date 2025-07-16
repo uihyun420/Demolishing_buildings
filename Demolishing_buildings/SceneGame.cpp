@@ -41,8 +41,6 @@ void SceneGame::Init()
 	debris = new Debris("debris");
 	staminabar = new StaminaBar("staminabar");
 	scoreText = new ScoreText("scoreText");
-
-	
 	
 	player->SetBuilding(building); // 플레이어와 빌딩 연결해야 충돌검사 등 진행
 	
@@ -51,6 +49,7 @@ void SceneGame::Init()
 	building->SetDebris(debris);
 
 	scoreText->SetScore(0);
+	staminabar->SetStaminaBar(player);
 
 	AddGameObject(player);
 	AddGameObject(background);
@@ -59,6 +58,7 @@ void SceneGame::Init()
 	AddGameObject(sky);
 	AddGameObject(debris);
 	AddGameObject(scoreText);
+	AddGameObject(staminabar);
 
 	Scene::Init();
 }
@@ -85,21 +85,18 @@ void SceneGame::Exit()
 	Scene::Exit();
 }
 
-
 void SceneGame::Update(float dt)
 {
-
 	worldView.setCenter(player->GetPosition().x, player->GetPosition().y); // 플레이어 위치에 따라 뷰 이동
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
 	{
 		SCENE_MGR.ChangeScene(SceneIds::Game);
 	}
-
 	Scene::Update(dt);
 }
+
 void SceneGame::Draw(sf::RenderWindow& window)
 {
-	Scene::Draw(window);
-	
+	Scene::Draw(window);	
 }

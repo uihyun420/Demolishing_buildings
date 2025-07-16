@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "StaminaBar.h"
+#include "Player.h"
 
 
 StaminaBar::StaminaBar(const std::string& name)
@@ -54,15 +55,15 @@ void StaminaBar::Release()
 
 void StaminaBar::Reset()
 {
-	initSize = { 400.f, 80.f };
-	staminaBar.setFillColor(sf::Color::Red);
+	initSize = { 300.f, 50.f };
+	staminaBar.setFillColor(sf::Color::White);
 	staminaBar.setSize(initSize);
-
-	SetPosition({ FRAMEWORK.GetWindowSizeF().x / 2 ,FRAMEWORK.GetWindowSizeF().y - 100.f });
+	SetPosition({ FRAMEWORK.GetWindowSizeF().x / 2 - 150 ,FRAMEWORK.GetWindowSizeF().y - 100.f });
 }
 
 void StaminaBar::Update(float dt)
 {
+
 }
 
 void StaminaBar::Draw(sf::RenderWindow& window)
@@ -70,7 +71,7 @@ void StaminaBar::Draw(sf::RenderWindow& window)
 	window.draw(staminaBar);
 }
 
-//void StaminaBar::SetStaminaBar(float stamina, float maxstamina)
-//{
-//	staminaBar.setSize({ initSize.x * (stamina / (float)maxstamina) , initSize.y });
-//}
+void StaminaBar::SetStaminaBarGage(float stamina, float maxstamina) // 플레이어가 얘를 사용하게 하려면
+{
+	staminaBar.setSize({ initSize.x * (stamina / (float)maxstamina) , initSize.y });
+}

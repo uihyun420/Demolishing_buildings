@@ -31,13 +31,14 @@ protected:
 
 	float stamina = 100.f;
 	float maxstamina = 100.f;
+
+
 	int score = 0;
 
 	float staminaDecrease = 30.f;
 	float staminaRicovery = 20.f;
 
 	bool canDefense = true;
-
 
 	HitBox hitBox;
 	Building* building;
@@ -66,5 +67,7 @@ public:
 
 	void TakeDamage(int damage);
 	void Die();
+
+	void SetStamina(StaminaBar* s) { staminabar = s; }
 };
 

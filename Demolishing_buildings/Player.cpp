@@ -3,6 +3,7 @@
 #include "Scene.h"
 #include "Building.h"
 #include "Utils.h"
+#include "StaminaBar.h"
 
 Player::Player(const std::string& name)
 	: GameObject(name)
@@ -213,7 +214,6 @@ void Player::Update(float dt)
 		BodyReset();
 	}
 
-
 	SetPosition(body.getPosition());
 }
 
@@ -237,6 +237,7 @@ void Player::BodyReset()
 	body.setPosition(body.getPosition().x, body.getPosition().y);
 }
 
+
 void Player::TakeDamage(int damage)
 {
 	hp -= damage;
@@ -251,3 +252,4 @@ void Player::Die()
 {
 	SetActive(false);
 }
+

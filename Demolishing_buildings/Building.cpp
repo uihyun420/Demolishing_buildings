@@ -61,8 +61,8 @@ void Building::Reset()
 	SetOrigin(Origins::MC);
 	SetActive(true);
 	
-	//velocity = { 0.f, 0.f };
-	//gravity = { 0.f, 200.f };
+	velocity = { 0.f, 0.f };
+	gravity = { 0.f, 170.f };
 
 	hp = 1000;
 	attack = 1000;

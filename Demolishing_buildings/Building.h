@@ -53,11 +53,11 @@ public:
 
 	void TakeDamage(int damage);
 	void Destroy();
+
+
+
 	void SetPlayer(Player* p) { player = p; }
 	void SetDebris(Debris* d) { debris = d; }
-
-	
-	
 
 };
 
