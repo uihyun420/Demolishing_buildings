@@ -62,6 +62,8 @@ public:
 	
 	void SetBuilding(Building* b) { building = b; } 
 
+	void BodyReset();
+
 	void TakeDamage(int damage);
 	void Die();
 };

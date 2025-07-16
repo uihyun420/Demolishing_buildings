@@ -60,22 +60,23 @@ void Player::Reset()
 	body.setTexture(TEXTURE_MGR.Get(texIds), true);
 	body.setPosition(0.f, 190.f);
 	body.setScale(0.5f, 0.5f);
-	SetOrigin(Origins::BC);
+	SetOrigin(Origins::MC);
 	SetActive(true);
 	isGrounded = true;
 	isAttack = false;
 	isDefense = false;
+	canDefense = true;
 
 	hp = 300;
 	attack = 50;
 	attackinterval = 1.f;
 
-	float stamina = 100.f;
-	float maxstamina = 100.f;
-	int score = 0;
+	stamina = 100.f;
+	maxstamina = 100.f;
+	score = 0;
 
-	float staminaDecrease = 30.f;
-	float staminaRicovery = 20.f;
+	staminaDecrease = 30.f;
+	staminaRicovery = 0.f;
 }
 
 void Player::Update(float dt)
@@ -107,9 +108,7 @@ void Player::Update(float dt)
 	{
 		isGrounded = false;
 		body.setTexture(TEXTURE_MGR.Get(texIdsJump));
-		body.setScale(0.5f, 0.5f);
-		SetOrigin(Origins::MC);
-		body.setPosition(body.getPosition().x, body.getPosition().y);
+		BodyReset();
 		velocity.y = -1500.f;
 	}
 
@@ -123,18 +122,14 @@ void Player::Update(float dt)
 		{
 			body.setTexture(TEXTURE_MGR.Get(texIdsJumpAttack), true);
 		}
-		body.setScale(0.5f, 0.5f);
-		SetOrigin(Origins::MC);
-		body.setPosition(body.getPosition().x, body.getPosition().y);
+		BodyReset();
 		isAttack = true;
 	}
 
 	if (isAttack && InputMgr::GetKeyUp(sf::Keyboard::Z))
 	{
 		body.setTexture(TEXTURE_MGR.Get(texIds), true);
-		body.setScale(0.5f, 0.5f);
-		SetOrigin(Origins::MC);
-		body.setPosition(body.getPosition().x, body.getPosition().y);
+		BodyReset();
 		isAttack = false;
 	}
 
@@ -156,7 +151,6 @@ void Player::Update(float dt)
 
 			if (velocity.y < 0 && playerBounds.top < buildingBounds.height)
 			{
-				//velocity.y = 400;
 				velocity = building->SetVelocity(push);
 			}
 
@@ -166,9 +160,7 @@ void Player::Update(float dt)
 				{
 					isDefense = true;
 					body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
-					body.setScale(0.5f, 0.5f);
-					SetOrigin(Origins::MC);
-					body.setPosition(body.getPosition().x, body.getPosition().y);
+					BodyReset();
 					building->SetVelocity({ 0.f, -300.f });
 					velocity.y = 1200.f;
 				}
@@ -182,20 +174,25 @@ void Player::Update(float dt)
 		}
 	}
 
+	// 처음 상태 
+	// isGrounded = true; 
+	// isAttack = false;
+	// isDefense = false; 
+	// canDefense = true;
+	//stamina = 100.f;
+	//maxstamina = 100.f;
+	//
+	//staminaDecrease = 30.f;
+	//staminaRicovery = 20.f;
 
-	if (!isDefense && stamina <= maxstamina) // 방어 상태가 아니고 스테미너가 max 스테미너보다 작다면 스테미너 회복
+
+	if (!isDefense && canDefense && InputMgr::GetKeyDown(sf::Keyboard::Down) && stamina <= maxstamina)  // 초기 상태에서 다운 키를 누르면 
 	{
-		stamina += staminaRicovery * dt;
-		if (stamina > maxstamina)
-		{
-			stamina = maxstamina;
-		}
-	}
+		isDefense = true;
+		body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
 
+		BodyReset();
 
-
-	if(isDefense && InputMgr::GetKeyDown(sf::Keyboard::Down) && stamina <= maxstamina) // 방어상태이고 아래키 누르고 스테미너가 max스테미너보다 작으면 스테미너 감소 시키고 0이되면 텍스처 변경
-	{
 		stamina -= staminaDecrease * dt;
 		if (stamina < 0.f)
 		{
@@ -203,31 +200,17 @@ void Player::Update(float dt)
 			canDefense = false;
 			isDefense = false;
 			body.setTexture(TEXTURE_MGR.Get(texIds), true);
-			body.setScale(0.5f, 0.5f);
-			body.setPosition(body.getPosition().x, body.getPosition().y);
-			SetOrigin(Origins::MC);
+			BodyReset();
 		}
 	}
 
 
-	if (isDefense && canDefense && InputMgr::GetKeyUp(sf::Keyboard::Down))  
+	if (isDefense && InputMgr::GetKeyUp(sf::Keyboard::Down))  
 	{
 		isDefense = false;
 		body.setTexture(TEXTURE_MGR.Get(texIds), true);
-		body.setScale(0.5f, 0.5f);
-		SetOrigin(Origins::MC);
-		body.setPosition(body.getPosition().x, body.getPosition().y);
-	}
 
-
-
-	if (!isDefense && canDefense && InputMgr::GetKeyDown(sf::Keyboard::Down)) // 방어상태가 아니고 방어 할 수 있고 다운키를 누르면 
-	{
-		isDefense = true;
-		body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
-		body.setScale(0.5f, 0.5f);
-		SetOrigin(Origins::MC);
-		body.setPosition(body.getPosition().x, body.getPosition().y);
+		BodyReset();
 	}
 
 
@@ -249,6 +232,13 @@ void Player::Draw(sf::RenderWindow& window)
 const sf::RectangleShape& Player::GetHitBox() const
 {
 	return hitBox.rect;
+}
+
+void Player::BodyReset()
+{
+	body.setScale(0.5f, 0.5f);
+	SetOrigin(Origins::MC);
+	body.setPosition(body.getPosition().x, body.getPosition().y);
 }
 
 void Player::TakeDamage(int damage)

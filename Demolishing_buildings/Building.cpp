@@ -61,8 +61,8 @@ void Building::Reset()
 	SetOrigin(Origins::MC);
 	SetActive(true);
 	
-	//hp = 1000;
-	//attack = 1000;
+	hp = 1000;
+	attack = 1000;
 }
 
 void Building::Update(float dt)

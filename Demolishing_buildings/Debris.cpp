@@ -29,6 +29,7 @@
 		}
 	}
 
+
 	void Debris::Draw(sf::RenderWindow & window)
 	{
 		for (const auto& d : debris)

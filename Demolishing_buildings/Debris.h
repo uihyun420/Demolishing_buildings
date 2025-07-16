@@ -16,6 +16,7 @@ protected:
 		"graphics/buildingbreak03.png",
 		"graphics/buildingbreak04.png"
 	};
+
 public:
 	Debris(const std::string& name = "");
 	virtual ~Debris() = default;
