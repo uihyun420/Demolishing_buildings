@@ -71,7 +71,7 @@ void StaminaBar::Draw(sf::RenderWindow& window)
 	window.draw(staminaBar);
 }
 
-void StaminaBar::SetValue(float stamina, float maxstamina) //  함수이름 똑같이 쓰지마라 
+void StaminaBar::SetValue(float stamina, float maxstamina) //  함수이름 똑같이 쓰지마라 뒈지기싫으면
 {
 	staminaBar.setSize({ initSize.x * (stamina / maxstamina) , initSize.y });
 }

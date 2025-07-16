@@ -70,6 +70,5 @@ public:
 	void Die();
 
 	void SetStaminaBarGage(StaminaBar* staminabar);
-	void SetStamina(StaminaBar* s) { staminabar = s; }
 };
 
