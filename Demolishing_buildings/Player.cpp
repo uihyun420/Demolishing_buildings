@@ -76,7 +76,7 @@ void Player::Reset()
 	score = 0;
 
 	staminaDecrease = 30.f;
-	staminaRicovery = 0.f;
+	staminaRicovery = 20.f;
 }
 
 void Player::Update(float dt)
@@ -134,11 +134,6 @@ void Player::Update(float dt)
 	}
 
 
-
-
-
-
-
 	if (building) // 빌딩 객체가 설정되어 있는 경우에만 충돌 검사 진행
 	{
 		if (Utils::CheckCollision(hitBox.rect, building->GetHitBox()))
@@ -192,7 +187,10 @@ void Player::Update(float dt)
 		body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
 
 		BodyReset();
+	}
 
+	if (isDefense)
+	{
 		stamina -= staminaDecrease * dt;
 		if (stamina < 0.f)
 		{
@@ -201,6 +199,20 @@ void Player::Update(float dt)
 			isDefense = false;
 			body.setTexture(TEXTURE_MGR.Get(texIds), true);
 			BodyReset();
+		}
+	}
+
+	if (!isDefense)
+	{
+		stamina += staminaRicovery * dt;
+		if (stamina > 10.f)
+		{
+			canDefense = true;
+
+			if (stamina > maxstamina)
+			{
+				stamina = maxstamina;
+			}
 		}
 	}
 
