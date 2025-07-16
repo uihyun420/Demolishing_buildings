@@ -8,7 +8,6 @@
 #include "Sky.h"
 #include "Debris.h"
 #include "StaminaBar.h"
-#include "UiScene.h"
 #include "ScoreText.h"
 
 SceneGame::SceneGame()
@@ -68,14 +67,16 @@ void SceneGame::Enter()
 	auto size = FRAMEWORK.GetWindowSizeF(); // 창 크기 가져오기
 	sf::Vector2f center{ size.x * 0.5f, size.y * 0.5f }; // 중앙 위치 계산
 
-	// 뷰 설정
-	//uiView.setSize(size);
-	//uiView.setCenter(center);
+	 //뷰 설정
+	uiView.setSize(size);
+	uiView.setCenter(center);
+
 	worldView.setSize(size);
 	worldView.setCenter(player->GetPosition().x, player ->GetPosition().y);
 
-	uiView.setSize({ FRAMEWORK.GetWindowSizeF().x, FRAMEWORK.GetWindowSizeF().y });
-	uiView.setCenter({ FRAMEWORK.GetWindowSizeF().x / 2, FRAMEWORK.GetWindowSizeF().y / 2 });
+	//uiView.setSize({ FRAMEWORK.GetWindowSizeF().x, FRAMEWORK.GetWindowSizeF().y });
+	//uiView.setCenter({ FRAMEWORK.GetWindowSizeF().x / 2, FRAMEWORK.GetWindowSizeF().y / 2 });
+
 	Scene::Enter();
 }
 

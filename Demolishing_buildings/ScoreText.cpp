@@ -22,9 +22,8 @@ void ScoreText::Reset()
 
 	score = 0;
 	SetScore(0);
-	SetOrigin(Origins::TL);
+	SetOrigin(Origins::TL); 
 	SetCharacterSize(50);
-	SetFontId("fonts/Galmuri11-Bold.ttf");
 	SetFillColor(sf::Color::White);
 	//SetPosition({FRAMEWORK.GetWindowSizeF().x / 2, FRAMEWORK.GetWindowSizeF().y / 2});
 }

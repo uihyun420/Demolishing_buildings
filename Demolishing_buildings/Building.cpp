@@ -55,12 +55,15 @@ void Building::Reset()
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 0;
 	building.setTexture(TEXTURE_MGR.Get(texIds));
-	building.setPosition(0.f, -2500.f);
+	building.setPosition(0.f, -2000.f);
 	building.setScale(0.8f, 0.8f);
 	isGrounded = false;
 	SetOrigin(Origins::MC);
 	SetActive(true);
 	
+	//velocity = { 0.f, 0.f };
+	//gravity = { 0.f, 200.f };
+
 	hp = 1000;
 	attack = 1000;
 }

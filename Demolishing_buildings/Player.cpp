@@ -109,7 +109,7 @@ void Player::Update(float dt)
 		isGrounded = false;
 		body.setTexture(TEXTURE_MGR.Get(texIdsJump));
 		BodyReset();
-		velocity.y = -1500.f;
+		velocity.y = -3000.f;
 	}
 
 	if (!isAttack && InputMgr::GetKeyDown(sf::Keyboard::Z))
@@ -142,7 +142,7 @@ void Player::Update(float dt)
 			sf::FloatRect buildingBounds = building->GetHitBox().getGlobalBounds();
 			//std::cout << "xxxx" << std::endl; 
 
-			sf::Vector2f push = { 0.f, 150.f };
+			sf::Vector2f push = { 0.f, 300.f };
 
 			if (velocity.y < 0 && playerBounds.top < buildingBounds.height)
 			{
@@ -157,7 +157,7 @@ void Player::Update(float dt)
 					body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
 					BodyReset();
 					building->SetVelocity({ 0.f, -300.f });
-					velocity.y = 1200.f;
+					velocity.y = 3000.f;
 				}
 
 				if (InputMgr::GetKeyDown(sf::Keyboard::Z) && isAttack && attackinterval >= 0.5f)
@@ -168,18 +168,6 @@ void Player::Update(float dt)
 			}
 		}
 	}
-
-	// 처음 상태 
-	// isGrounded = true; 
-	// isAttack = false;
-	// isDefense = false; 
-	// canDefense = true;
-	//stamina = 100.f;
-	//maxstamina = 100.f;
-	//
-	//staminaDecrease = 30.f;
-	//staminaRicovery = 20.f;
-
 
 	if (!isDefense && canDefense && InputMgr::GetKeyDown(sf::Keyboard::Down) && stamina <= maxstamina)  // 초기 상태에서 다운 키를 누르면 
 	{
@@ -228,10 +216,6 @@ void Player::Update(float dt)
 
 	SetPosition(body.getPosition());
 }
-
-
-
-
 
 
 
