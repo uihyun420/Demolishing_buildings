@@ -108,6 +108,9 @@
     <ClCompile Include="TitleBackGround.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="MenuUi.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\InputMgr.h">
@@ -210,6 +213,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="TitleBackGround.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuUi.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

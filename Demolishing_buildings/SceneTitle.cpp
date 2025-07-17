@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SceneTitle.h"
 #include "TitleBackGround.h"
+#include "MenuUi.h"
 
 SceneTitle::SceneTitle()
 	:Scene(SceneIds::Title)
@@ -11,13 +12,14 @@ SceneTitle::SceneTitle()
 void SceneTitle::Init()
 {	
 	texIds.push_back("graphics/title.png");
+	texIds.push_back("graphics/choosebar.png");
 
 
 	titlebackground = new TitleBackGround("titlebackground");
-
+	chooseBar = new MenuUi("chooseBar");
 
 	AddGameObject(titlebackground);
-
+	AddGameObject(chooseBar);
 
 	Scene::Init();
 }
