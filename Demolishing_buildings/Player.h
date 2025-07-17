@@ -4,6 +4,7 @@
 
 class Building;
 class StaminaBar;
+class ComboText;
 class ScoreText;
 
 class Player : public GameObject
@@ -46,6 +47,7 @@ protected:
 	Building* building;
 	StaminaBar* staminabar;
 	ScoreText* scoreText;
+	ComboText* comboText;
 
 public:
 	Player(const std::string& name = "");
@@ -73,6 +75,7 @@ public:
 
 	void SetStaminaBarGage(StaminaBar* staminabar);
 	void SetScoreText(ScoreText* scoreText);
+	void SetScoreCombo(ComboText* comboText);
 
 };
 

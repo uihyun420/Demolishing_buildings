@@ -5,6 +5,8 @@
 #include "Utils.h"
 #include "StaminaBar.h"
 #include "ScoreText.h"
+#include "ComboText.h"
+
 
 Player::Player(const std::string& name)
 	: GameObject(name)
@@ -169,6 +171,7 @@ void Player::Update(float dt)
 					attackinterval = 1.0f;
 					building->TakeDamage(attack);
 					scoreText->SetScore(100);
+					comboText->SetCombo(0);
 				}
 			}
 		}
@@ -267,6 +270,11 @@ void Player::SetStaminaBarGage(StaminaBar* staminabar)
 void Player::SetScoreText(ScoreText* scoreText)
 {
 	this->scoreText = scoreText;
+}
+
+void Player::SetScoreCombo(ComboText* comboText)
+{
+	this->comboText = comboText;
 }
 
 

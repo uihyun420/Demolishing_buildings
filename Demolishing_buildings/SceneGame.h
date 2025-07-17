@@ -9,6 +9,7 @@ class Sky;
 class Debris;
 class StaminaBar;
 class ScoreText;
+class ComboText;
 
 
 
@@ -23,7 +24,7 @@ protected:
 	Debris* debris;
 	StaminaBar* staminabar;
 	ScoreText* scoreText;  // ui들도 게임씬에 그려야함 uiview라는게 따로 새로운 씬을 만들어서 하는게 아님 
-
+	ComboText* comboText;
 
 public:
 	SceneGame();
