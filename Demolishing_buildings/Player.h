@@ -6,17 +6,20 @@ class Building;
 class StaminaBar;
 class ComboText;
 class ScoreText;
+class SpecialAttack;
 
 class Player : public GameObject
 {
 protected:
 	sf::Sprite body;
+	//sf::Sprite specialattack;
+
 	std::string texIds = "graphics/stand.png";
 	std::string texIdsJump = "graphics/jump.png";
 	std::string texIdsAttack = "graphics/standattack.png";
 	std::string texIdsJumpAttack = "graphics/jumpattack.png";
 	std::string texIdsstandguard = "graphics/standguard.png";
-	std::string texIdsSpecialAttack = "graphics/specialattack.png";
+	//std::string texIdsSpecialAttack = "graphics/specialattack.png";
 
 	sf::Vector2f gravity = { 0.f, 150.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
@@ -38,15 +41,15 @@ protected:
 	float staminaDecrease = 30.f;
 	float staminaRicovery = 20.f;
 
-	int specialAttack;
-	float specialCooltime;
+	int specialattack;
+	//float specialCooltime;
 
 	HitBox hitBox;
 	Building* building;
 	StaminaBar* staminabar;
 	ScoreText* scoreText;
 	ComboText* comboText;
-
+	SpecialAttack* specialAttack;
 public:
 	Player(const std::string& name = "");
 	~Player() override = default;
@@ -74,6 +77,6 @@ public:
 	void SetStaminaBarGage(StaminaBar* staminabar);
 	void SetScoreText(ScoreText* scoreText);
 	void SetScoreCombo(ComboText* comboText);
-
+	void SetSpecialAttack(SpecialAttack* specialAttack);
 };
 

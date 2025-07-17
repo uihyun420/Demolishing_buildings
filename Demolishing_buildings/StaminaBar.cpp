@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "StaminaBar.h"
 #include "Player.h"
+#include "HitBox.h"
 
 
 StaminaBar::StaminaBar(const std::string& name)

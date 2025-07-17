@@ -163,6 +163,7 @@
     <ClCompile Include="Framework\SoundMgr.cpp" />
     <ClCompile Include="ScoreText.cpp" />
     <ClCompile Include="Sky.cpp" />
+    <ClCompile Include="SpecialAttack.cpp" />
     <ClCompile Include="StaminaBar.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -198,6 +199,7 @@
     <ClInclude Include="Framework\SoundMgr.h" />
     <ClInclude Include="ScoreText.h" />
     <ClInclude Include="Sky.h" />
+    <ClInclude Include="SpecialAttack.h" />
     <ClInclude Include="StaminaBar.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Framework\TextGo.h" />

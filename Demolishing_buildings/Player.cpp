@@ -6,6 +6,7 @@
 #include "StaminaBar.h"
 #include "ScoreText.h"
 #include "ComboText.h"
+#include "SpecialAttack.h"
 
 
 Player::Player(const std::string& name)
@@ -17,24 +18,28 @@ void Player::SetPosition(const sf::Vector2f& pos)
 {
 	GameObject::SetPosition(pos);
 	body.setPosition(pos);
+	//specialattack.setPosition(pos);
 }
 
 void Player::SetRotation(float rot)
 {
 	GameObject::SetRotation(rot);
 	body.setRotation(rot);
+	//specialattack.setRotation(rot);
 }
 
 void Player::SetScale(const sf::Vector2f& s)
 {
 	GameObject::SetScale(s);
 	body.setScale(s);
+	//specialattack.setScale(s);
 }
 
 void Player::SetOrigin(const sf::Vector2f& o)
 {
 	GameObject::SetOrigin(o);
 	body.setOrigin(o);
+	//specialattack.setOrigin(o);
 }
 
 void Player::SetOrigin(Origins preset)
@@ -43,6 +48,7 @@ void Player::SetOrigin(Origins preset)
 	if (preset != Origins::Custom)
 	{
 		Utils::SetOrigin(body, preset);
+		//Utils::SetOrigin(specialattack, preset);
 	}
 }
 
@@ -52,6 +58,7 @@ void Player::Init()
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 1;
 
+	specialAttack->Reset();
 }
 
 void Player::Release()
@@ -78,8 +85,8 @@ void Player::Reset()
 	attack = 50;
 	attackinterval = 1.f;
 
-	specialAttack = 500;
-	specialCooltime = 10.f;
+	specialattack = 500;
+	//specialCooltime = 10.f;
 
 	stamina = 100.f;
 	maxstamina = 100.f;
@@ -92,7 +99,7 @@ void Player::Update(float dt)
 
 {
 	attackinterval += dt;
-	specialCooltime -= dt;
+	//specialCooltime -= dt;
 
 	hitBox.UpdateTransform(body, body.getLocalBounds());
 
@@ -101,6 +108,7 @@ void Player::Update(float dt)
 		velocity += gravity * dt;
 		body.move(velocity * dt);
 	}
+	
 
 	if (body.getPosition().y >= 190.f)
 	{
@@ -146,25 +154,18 @@ void Player::Update(float dt)
 	}
 
 	
-	if (InputMgr::GetKeyDown(sf::Keyboard::X) && canspecialAttack)
-	{
-		canspecialAttack = false;
-		body.setTexture(TEXTURE_MGR.Get(texIdsSpecialAttack));
-		body.setScale(2.f, 2.f);
-		SetOrigin(Origins::ML);
-		velocity.y = -3000;
+	//if (InputMgr::GetKeyDown(sf::Keyboard::X) && canspecialAttack)
+	//{
+	//	canspecialAttack = false;
+	//	specialattack.setTexture(TEXTURE_MGR.Get(texIdsSpecialAttack));
+	//	specialattack.setScale(2.f, 2.f);
+	//	SetOrigin(Origins::ML);
+	//	velocity.y = -3000;
 
-		if (Utils::CheckCollision(hitBox.rect, building->GetHitBox()))
-		{
-			canspecialAttack = false;
-			building->TakeDamage(specialAttack);
-			scoreText->SetScore(1000);
-			comboText->SetCombo(0);
-			body.setTexture(TEXTURE_MGR.Get(texIds));
-			BodyReset();
-
-		}
-	}
+	//	building->TakeDamage(specialAttack);
+	//	scoreText->SetScore(1000);
+	//	comboText->SetCombo(0);
+	//}
 
 	//if (InputMgr::GetKeyUp(sf::Keyboard::X) && !canspecialAttack)
 	//{
@@ -209,6 +210,19 @@ void Player::Update(float dt)
 			}
 		}
 	}
+
+	if (InputMgr::GetKeyDown(sf::Keyboard::X) && canspecialAttack)
+	{
+		specialAttack->Skill(position, {0.f,-1000.f}, 4.f, specialattack);
+		//velocity.y = -3000.f;
+		
+		building->TakeDamage(specialattack);
+		scoreText->SetScore(300);
+		comboText->SetCombo(0);
+		specialAttack->SetActive(true);
+		canspecialAttack = false;
+	}
+
 
 	if (!isDefense && canDefense && InputMgr::GetKeyDown(sf::Keyboard::Down) && stamina <= maxstamina)  // 초기 상태에서 다운 키를 누르면 
 	{
@@ -264,6 +278,7 @@ void Player::Update(float dt)
 void Player::Draw(sf::RenderWindow& window)
 {
 	window.draw(body);
+	//window.draw(specialattack);
 	hitBox.Draw(window);
 }
 
@@ -308,6 +323,11 @@ void Player::SetScoreText(ScoreText* scoreText)
 void Player::SetScoreCombo(ComboText* comboText)
 {
 	this->comboText = comboText;
+}
+
+void Player::SetSpecialAttack(SpecialAttack* specialAttack)
+{
+	this->specialAttack = specialAttack;
 }
 
 

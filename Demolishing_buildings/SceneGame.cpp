@@ -10,6 +10,7 @@
 #include "StaminaBar.h"
 #include "ScoreText.h"
 #include "ComboText.h"
+#include "SpecialAttack.h"
 
 SceneGame::SceneGame()
 	:Scene(SceneIds::Game)
@@ -44,7 +45,7 @@ void SceneGame::Init()
 	staminabar = new StaminaBar("staminabar");
 	scoreText = new ScoreText("scoreText");
 	comboText = new ComboText("comboText");
-
+	specialAttack = new SpecialAttack("specialAttack");
 
 	
 	building->SetPlayer(player);
@@ -52,11 +53,13 @@ void SceneGame::Init()
 
 	scoreText->SetScore(0);
 
+	specialAttack->SetPlayer(player);
+
 	player->SetBuilding(building); // 플레이어와 빌딩 연결해야 충돌검사 등 진행
 	player->SetScoreCombo(comboText);
 	player->SetStaminaBarGage(staminabar); // 이거 반대로 했었음 플레이어가 스테미너바의 스테미너 게이지에 이어지도록
 	player->SetScoreText(scoreText);
-	
+	player->SetSpecialAttack(specialAttack);
 
 	AddGameObject(player);
 	AddGameObject(background);
@@ -67,6 +70,7 @@ void SceneGame::Init()
 	AddGameObject(scoreText);
 	AddGameObject(staminabar);
 	AddGameObject(comboText);
+	AddGameObject(specialAttack);
 
 	Scene::Init();
 }
