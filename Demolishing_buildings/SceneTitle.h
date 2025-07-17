@@ -4,11 +4,13 @@
 class TitleBackGround;
 class MenuUi;
 
+
 class SceneTitle : public Scene
 {
 protected:
 	TitleBackGround* titlebackground;
 	MenuUi* chooseBar;
+
 public:
 	SceneTitle();
 	~SceneTitle() override = default;

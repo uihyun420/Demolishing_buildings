@@ -2,6 +2,7 @@
 #include "SceneTitle.h"
 #include "TitleBackGround.h"
 #include "MenuUi.h"
+#include "TextGo.h"
 
 SceneTitle::SceneTitle()
 	:Scene(SceneIds::Title)
@@ -11,6 +12,9 @@ SceneTitle::SceneTitle()
 
 void SceneTitle::Init()
 {	
+	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
+	fontIds.push_back("fonts/Galmuri11-Bold.ttf");
+
 	texIds.push_back("graphics/title.png");
 	texIds.push_back("graphics/choosebar.png");
 
@@ -20,6 +24,28 @@ void SceneTitle::Init()
 
 	AddGameObject(titlebackground);
 	AddGameObject(chooseBar);
+
+
+
+
+	TextGo* selectText_01 = new TextGo("fonts/Galmuri11-Bold.ttf");
+	selectText_01->SetString("EASY");
+	selectText_01->SetCharacterSize(60);
+	selectText_01->SetFillColor(sf::Color::White);
+	selectText_01->SetOrigin(Origins::MC);
+	selectText_01->SetPosition({ bounds.width / 2.f, bounds.height / 2.f - 100.f });
+	AddGameObject(selectText_01);
+
+
+	TextGo* selectText_02 = new TextGo("fonts/Galmuri11-Bold.ttf");
+	selectText_02->SetString("HARD");
+	selectText_02->SetCharacterSize(60);
+	selectText_02->SetFillColor(sf::Color::Red);
+	selectText_02->SetOrigin(Origins::MC);
+	selectText_02->SetPosition({ bounds.width / 2.f, bounds.height / 2.f + 100.f});
+	AddGameObject(selectText_02);
+
+
 
 	Scene::Init();
 }

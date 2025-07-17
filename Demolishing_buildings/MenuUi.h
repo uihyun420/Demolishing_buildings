@@ -10,7 +10,9 @@ protected:
 	sf::Sprite chooseBar;
 	std::string choosebartexIds = "graphics/choosebar.png";
 
-	TextGo* textGo;
+	TextGo* selectText;
+	sf::String selecttexIds = "fonts/Galmuri11-Bold.ttf";
+	
 public:
 	MenuUi(const std::string& name = "");
 	virtual ~MenuUi() = default;

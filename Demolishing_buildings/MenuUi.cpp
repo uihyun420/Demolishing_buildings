@@ -46,6 +46,7 @@ void MenuUi::Init()
 {
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 1;
+
 }
 
 void MenuUi::Release()
@@ -57,12 +58,12 @@ void MenuUi::Reset()
 	chooseBar.setTexture(TEXTURE_MGR.Get(choosebartexIds));
 	chooseBar.setPosition(FRAMEWORK.GetWindowSizeF().x /2 - 300.f, FRAMEWORK.GetWindowSizeF().y / 2);
 	chooseBar.setScale(0.3f, 0.3f);
-
 	SetOrigin(Origins::MC);
 }
 
 void MenuUi::Update(float dt)
 {
+
 }
 
 void MenuUi::Draw(sf::RenderWindow& window)
