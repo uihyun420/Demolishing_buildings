@@ -26,8 +26,6 @@ void SceneTitle::Init()
 	AddGameObject(chooseBar);
 
 
-
-
 	TextGo* selectText_01 = new TextGo("fonts/Galmuri11-Bold.ttf");
 	selectText_01->SetString("EASY");
 	selectText_01->SetCharacterSize(60);
@@ -40,7 +38,7 @@ void SceneTitle::Init()
 	TextGo* selectText_02 = new TextGo("fonts/Galmuri11-Bold.ttf");
 	selectText_02->SetString("HARD");
 	selectText_02->SetCharacterSize(60);
-	selectText_02->SetFillColor(sf::Color::Red);
+	selectText_02->SetFillColor(sf::Color::White);
 	selectText_02->SetOrigin(Origins::MC);
 	selectText_02->SetPosition({ bounds.width / 2.f, bounds.height / 2.f + 100.f});
 	AddGameObject(selectText_02);
@@ -72,6 +70,20 @@ void SceneTitle::Exit()
 
 void SceneTitle::Update(float dt)
 {
+	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
+	//if (InputMgr::GetKeyDown(sf::Keyboard::Up));
+	//{
+	//	chooseBar->SetPosition({ FRAMEWORK.GetWindowSizeF().x / 2 - 300.f, bounds.height / 2.f - 100.f });
+	//}
+
+
+	//if (InputMgr::GetKeyDown(sf::Keyboard::Down));
+	//{
+	//	chooseBar->SetPosition({ FRAMEWORK.GetWindowSizeF().x / 2 - 300.f, bounds.height / 2.f + 100.f });
+	//}
+
+
+
 	if(InputMgr::GetKeyDown(sf::Keyboard::Enter))
 	{
 		SCENE_MGR.ChangeScene(SceneIds::Game);

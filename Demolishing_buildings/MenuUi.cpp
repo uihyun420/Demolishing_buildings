@@ -63,6 +63,19 @@ void MenuUi::Reset()
 
 void MenuUi::Update(float dt)
 {
+	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
+	
+
+	if (InputMgr::GetKeyDown(sf::Keyboard::Up));
+	{
+		chooseBar.setPosition({ FRAMEWORK.GetWindowSizeF().x / 2 - 300.f, bounds.height / 2.f - 100.f });
+	}
+
+
+	if (InputMgr::GetKeyDown(sf::Keyboard::Down));
+	{
+		chooseBar.setPosition({ FRAMEWORK.GetWindowSizeF().x / 2 - 300.f, bounds.height / 2.f + 100.f });
+	}
 
 }
 
