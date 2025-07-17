@@ -153,26 +153,6 @@ void Player::Update(float dt)
 		isAttack = false;
 	}
 
-	
-	//if (InputMgr::GetKeyDown(sf::Keyboard::X) && canspecialAttack)
-	//{
-	//	canspecialAttack = false;
-	//	specialattack.setTexture(TEXTURE_MGR.Get(texIdsSpecialAttack));
-	//	specialattack.setScale(2.f, 2.f);
-	//	SetOrigin(Origins::ML);
-	//	velocity.y = -3000;
-
-	//	building->TakeDamage(specialAttack);
-	//	scoreText->SetScore(1000);
-	//	comboText->SetCombo(0);
-	//}
-
-	//if (InputMgr::GetKeyUp(sf::Keyboard::X) && !canspecialAttack)
-	//{
-	//	canspecialAttack = false;
-	//	body.setTexture(TEXTURE_MGR.Get(texIds));
-	//	BodyReset();
-	//}
 
 	if (building) // 빌딩 객체가 설정되어 있는 경우에만 충돌 검사 진행
 	{
@@ -272,8 +252,6 @@ void Player::Update(float dt)
 
 	SetPosition(body.getPosition());
 }
-
-
 
 void Player::Draw(sf::RenderWindow& window)
 {
