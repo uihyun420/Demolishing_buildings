@@ -33,6 +33,7 @@ void SceneGame::Init()
 	texIds.push_back("graphics/buildingbreak02.png");
 	texIds.push_back("graphics/buildingbreak03.png");
 	texIds.push_back("graphics/buildingbreak04.png");
+	texIds.push_back("graphics/specialattack.png");
 	
 	player = new Player("Player");
 	background = new BackGround("background");

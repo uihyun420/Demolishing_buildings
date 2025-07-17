@@ -16,32 +16,30 @@ protected:
 	std::string texIdsAttack = "graphics/standattack.png";
 	std::string texIdsJumpAttack = "graphics/jumpattack.png";
 	std::string texIdsstandguard = "graphics/standguard.png";
+	std::string texIdsSpecialAttack = "graphics/specialattack.png";
 
 	sf::Vector2f gravity = { 0.f, 150.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
 	bool isGrounded = true;
 	bool isAttack = false;
 	bool isDefense = false;
-
-	//bool isActive = true;
-	float speed = 1000.f;
+	bool canDefense = true;
+	bool canspecialAttack = true;
 
 	int attack = 0;
-	float attackinterval = 0.5f;
-	float hitinterval = 1.f;
 	int hp = 100;
 
-
+	float speed = 1000.f;
+	float attackinterval = 0.5f;
+	float hitinterval = 1.f;
+	
 	float stamina = 100.f;
 	float maxstamina = 100.f;
-
-
-	int score = 0;
-
 	float staminaDecrease = 30.f;
 	float staminaRicovery = 20.f;
 
-	bool canDefense = true;
+	int specialAttack;
+	float specialCooltime;
 
 	HitBox hitBox;
 	Building* building;
@@ -67,12 +65,12 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 	
-	void SetBuilding(Building* b) { building = b; } 
 	void BodyReset();
 
 	void TakeDamage(int damage);
 	void Die();
 
+	void SetBuilding(Building* b) { building = b; }
 	void SetStaminaBarGage(StaminaBar* staminabar);
 	void SetScoreText(ScoreText* scoreText);
 	void SetScoreCombo(ComboText* comboText);

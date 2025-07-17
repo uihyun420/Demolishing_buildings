@@ -36,6 +36,5 @@ void ComboText::SetCombo(int combo)
 {
 	this->combo++;
 	SetString("Combo: " + std::to_string(this->combo));
-	std::cout << "xx" << std::endl;
 }
 

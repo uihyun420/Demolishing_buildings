@@ -72,14 +72,17 @@ void Player::Reset()
 	isAttack = false;
 	isDefense = false;
 	canDefense = true;
+	canspecialAttack = true;
 
 	hp = 300;
 	attack = 50;
 	attackinterval = 1.f;
 
+	specialAttack = 500;
+	specialCooltime = 10.f;
+
 	stamina = 100.f;
 	maxstamina = 100.f;
-	score = 0;
 
 	staminaDecrease = 30.f;
 	staminaRicovery = 20.f;
@@ -89,6 +92,7 @@ void Player::Update(float dt)
 
 {
 	attackinterval += dt;
+	specialCooltime -= dt;
 
 	hitBox.UpdateTransform(body, body.getLocalBounds());
 
@@ -118,6 +122,7 @@ void Player::Update(float dt)
 		velocity.y = -3000.f;
 	}
 
+
 	if (!isAttack && InputMgr::GetKeyDown(sf::Keyboard::Z))
 	{
 		if (isGrounded)
@@ -132,6 +137,7 @@ void Player::Update(float dt)
 		isAttack = true;
 	}
 
+
 	if (isAttack && InputMgr::GetKeyUp(sf::Keyboard::Z))
 	{
 		body.setTexture(TEXTURE_MGR.Get(texIds), true);
@@ -139,6 +145,13 @@ void Player::Update(float dt)
 		isAttack = false;
 	}
 
+	
+	if (InputMgr::GetKeyUp(sf::Keyboard::X) && !canspecialAttack)
+	{
+		canspecialAttack = false;
+		body.setTexture(TEXTURE_MGR.Get(texIds));
+		BodyReset();
+	}
 
 	if (building) // 빌딩 객체가 설정되어 있는 경우에만 충돌 검사 진행
 	{
@@ -173,6 +186,16 @@ void Player::Update(float dt)
 					scoreText->SetScore(100);
 					comboText->SetCombo(0);
 				}
+				if (InputMgr::GetKeyDown(sf::Keyboard::X) && canspecialAttack)
+				{
+					canspecialAttack = false;
+					body.setTexture(TEXTURE_MGR.Get(texIdsSpecialAttack));
+					body.setScale(2.f, 2.f);
+					SetOrigin(Origins::ML);
+
+					building->TakeDamage(specialAttack);
+				}
+				
 			}
 		}
 	}
