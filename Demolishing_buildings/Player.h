@@ -4,6 +4,7 @@
 
 class Building;
 class StaminaBar;
+class ScoreText;
 
 class Player : public GameObject
 {
@@ -44,6 +45,7 @@ protected:
 	HitBox hitBox;
 	Building* building;
 	StaminaBar* staminabar;
+	ScoreText* scoreText;
 
 public:
 	Player(const std::string& name = "");
@@ -70,5 +72,7 @@ public:
 	void Die();
 
 	void SetStaminaBarGage(StaminaBar* staminabar);
+	void SetScoreText(ScoreText* scoreText);
+
 };
 

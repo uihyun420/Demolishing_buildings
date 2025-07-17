@@ -26,6 +26,6 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 
 	void SetValue(float stamina, float maxstamina); // 얘가 플레이어와 이어져야 게이지가 줄어듬 
-	
+
 };
 

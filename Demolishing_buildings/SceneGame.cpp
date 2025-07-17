@@ -44,11 +44,13 @@ void SceneGame::Init()
 	
 	player->SetBuilding(building); // 플레이어와 빌딩 연결해야 충돌검사 등 진행
 	
+	
 	building->SetPlayer(player);
 	building->SetDebris(debris);
 
 	scoreText->SetScore(0);
 	player->SetStaminaBarGage(staminabar); // 이거 반대로 했었음 플레이어가 스테미너바의 스테미너 게이지에 이어지도록
+	player->SetScoreText(scoreText);
 
 	AddGameObject(player);
 	AddGameObject(background);

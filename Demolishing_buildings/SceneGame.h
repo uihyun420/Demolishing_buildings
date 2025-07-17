@@ -11,6 +11,7 @@ class StaminaBar;
 class ScoreText;
 
 
+
 class SceneGame : public Scene
 {
 protected:

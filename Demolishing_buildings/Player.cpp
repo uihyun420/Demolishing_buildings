@@ -4,6 +4,7 @@
 #include "Building.h"
 #include "Utils.h"
 #include "StaminaBar.h"
+#include "ScoreText.h"
 
 Player::Player(const std::string& name)
 	: GameObject(name)
@@ -167,6 +168,7 @@ void Player::Update(float dt)
 				{
 					attackinterval = 1.0f;
 					building->TakeDamage(attack);
+					scoreText->SetScore(100);
 				}
 			}
 		}
@@ -261,5 +263,10 @@ void Player::SetStaminaBarGage(StaminaBar* staminabar)
 	{
 		this->staminabar = staminabar;
 	}
+
+void Player::SetScoreText(ScoreText* scoreText)
+{
+	this->scoreText = scoreText;
+}
 
 
