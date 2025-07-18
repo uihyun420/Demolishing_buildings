@@ -142,6 +142,7 @@ void Player::Update(float dt)
 			body.setTexture(TEXTURE_MGR.Get(texIdsJumpAttack), true);
 		}
 		BodyReset();
+		SOUND_MGR.Play(Audio::swish);
 		isAttack = true;
 	}
 
@@ -186,6 +187,7 @@ void Player::Update(float dt)
 					building->TakeDamage(attack);
 					scoreText->SetScore(100);
 					comboText->SetCombo(0);
+					SOUND_MGR.Play(Audio::attack); 
 				}
 			}
 		}
@@ -200,6 +202,7 @@ void Player::Update(float dt)
 		scoreText->SetScore(300);
 		comboText->SetCombo(0);
 		specialAttack->SetActive(true);
+		SOUND_MGR.Play(Audio::specialattack);
 		canspecialAttack = false;
 	}
 
@@ -279,12 +282,12 @@ void Player::TakeDamage(int damage)
 	if (hp <= 0)
 	{
 		hp = 0;
-		Die();
+		Die();		
 	}
 }
 
 void Player::Die()
-{
+{	
 	SetActive(false);
 }
 

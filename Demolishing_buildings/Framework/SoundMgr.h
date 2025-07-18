@@ -19,6 +19,10 @@ protected:
 	float sfxVolume = 100.f;
 	float bgmVolume = 100.f;
 
+	std::vector<sf::SoundBuffer> soundBuffers;
+	std::vector<sf::Sound> sounds;
+	std::vector<std::string> audioIds;
+
 public:
 
 	void SetBgmVolume(float v)
@@ -41,6 +45,7 @@ public:
 	void PlaySfx(sf::SoundBuffer& buffer, bool loop = false);
 
 	void StopAllSfx();
+	void Play(Audio id);
 };
 
 #define SOUND_MGR (SoundMgr::Instance())

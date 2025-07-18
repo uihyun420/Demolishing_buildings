@@ -35,3 +35,13 @@ enum class Sides
 	Right,
 	None,
 };
+
+enum class Audio
+{
+	attack,
+	building,
+	buildingbreak,
+	click,
+	specialattack,
+	swish,
+};

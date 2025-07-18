@@ -3,6 +3,25 @@
 
 void SoundMgr::Init(int totalChannels)
 {
+	audioIds.push_back("sounds/attack.wav");
+	audioIds.push_back("sounds/building.wav");
+	audioIds.push_back("sounds/buildingbreak.wav");
+	audioIds.push_back("sounds/click.wav");
+	audioIds.push_back("sounds/specialattack.wav");
+	audioIds.push_back("sounds/swish.wav");
+
+	for (int i = 0; i < audioIds.size(); i++) {
+		sf::SoundBuffer soundBuffer;
+		soundBuffer.loadFromFile(audioIds[i]);
+		soundBuffers.push_back(soundBuffer);
+	}
+	for (int i = 0; i < soundBuffers.size(); i++) {
+		sf::Sound sound;
+		sound.setBuffer(soundBuffers[i]);
+		sounds.push_back(sound);
+	}
+
+
 	for (int i = 0; i < totalChannels; ++i)
 	{
 		sf::Sound* sound = new sf::Sound();
@@ -104,4 +123,9 @@ void SoundMgr::StopAllSfx()
 		waiting.push_back(sound);
 	}
 	playing.clear();
+}
+
+void SoundMgr::Play(Audio id)
+{
+	sounds[(int)id].play();
 }

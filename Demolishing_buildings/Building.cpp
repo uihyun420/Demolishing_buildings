@@ -95,7 +95,7 @@ void Building::Update(float dt)
 
 		if ((buildingBounds.top + buildingBounds.height) > 190 )
 		{
-			player->TakeDamage(attack);
+			player->TakeDamage(attack);	
 		}
 	}
 	building.setPosition(building.getPosition().x, building.getPosition().y);
@@ -120,12 +120,14 @@ void Building::TakeDamage(int attack)
 	{
 		hp = 0;
 		Destroy();
+		
 	}
 }
 
 void Building::Destroy()
 {
 	SetActive(false);
+	SOUND_MGR.Play(Audio::buildingbreak);
 	//hitBox.rect.setSize({ 0.f, 0.f });
 	//hitBox.isActive = false;
 	if (debris)

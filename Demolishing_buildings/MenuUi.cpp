@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "MenuUi.h"
 
-
 MenuUi::MenuUi(const std::string& name)
 	: GameObject(name)
 {
@@ -39,8 +38,6 @@ void MenuUi::SetOrigin(Origins preset)
 		Utils::SetOrigin(chooseBar, preset);
 	}
 }
-
-
 
 void MenuUi::Init()
 {
@@ -89,12 +86,14 @@ void MenuUi::Update(float dt)
 		selectIndex = (selectIndex + barPositions.size() - 1) % barPositions.size();
 		chooseBar.setPosition(barPositions[selectIndex]);
 		Square.setPosition(squarePositions[selectIndex]);
+		SOUND_MGR.Play(Audio::click); 
 	}
 	if (InputMgr::GetKeyDown(sf::Keyboard::Down))
 	{
 		selectIndex = (selectIndex + 1) % barPositions.size();
 		chooseBar.setPosition(barPositions[selectIndex]);
 		Square.setPosition(squarePositions[selectIndex]);
+		SOUND_MGR.Play(Audio::click);
 	}
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
