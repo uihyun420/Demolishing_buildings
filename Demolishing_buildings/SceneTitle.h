@@ -10,6 +10,7 @@ class SceneTitle : public Scene
 protected:
 	TitleBackGround* titlebackground;
 	MenuUi* chooseBar;
+	MenuUi* Square;
 
 public:
 	SceneTitle();

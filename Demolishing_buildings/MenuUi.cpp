@@ -46,7 +46,6 @@ void MenuUi::Init()
 {
 	sortingLayer = SortingLayers::Foreground;
 	sortingOrder = 1;
-
 }
 
 void MenuUi::Release()
@@ -55,31 +54,65 @@ void MenuUi::Release()
 
 void MenuUi::Reset()
 {
-	chooseBar.setTexture(TEXTURE_MGR.Get(choosebartexIds));
-	chooseBar.setPosition(FRAMEWORK.GetWindowSizeF().x /2 - 300.f, FRAMEWORK.GetWindowSizeF().y / 2);
-	chooseBar.setScale(0.3f, 0.3f);
+	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
 	SetOrigin(Origins::MC);
+
+	chooseBar.setTexture(TEXTURE_MGR.Get(choosebartexIds));
+	chooseBar.setScale(0.3f, 0.3f);
+
+	barPositions.clear();
+	barPositions.push_back({ 350.f, 195.f });
+	barPositions.push_back({ 350.f, 395.f });
+
+	Square.setSize({ 200.f, 80.f });
+	Square.scale(1.f, 1.f);
+	Square.setFillColor(sf::Color::Transparent);
+	Square.setOutlineColor(sf::Color::Red);
+	Square.setOutlineThickness(5.f);
+
+	squarePositions.clear();
+	squarePositions.push_back({ 535.f, 225.f }); 
+	squarePositions.push_back({ 535.f, 425.f }); 
+
+	selectIndex = 0;
+	chooseBar.setPosition(barPositions[selectIndex]);
+	Square.setPosition(squarePositions[selectIndex]);
+
 }
 
 void MenuUi::Update(float dt)
 {
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
-	
 
-	if (InputMgr::GetKeyDown(sf::Keyboard::Up));
+	if (InputMgr::GetKeyDown(sf::Keyboard::Up))
 	{
-		chooseBar.setPosition({ FRAMEWORK.GetWindowSizeF().x / 2 - 300.f, bounds.height / 2.f - 100.f });
+		selectIndex = (selectIndex + barPositions.size() - 1) % barPositions.size();
+		chooseBar.setPosition(barPositions[selectIndex]);
+		Square.setPosition(squarePositions[selectIndex]);
+	}
+	if (InputMgr::GetKeyDown(sf::Keyboard::Down))
+	{
+		selectIndex = (selectIndex + 1) % barPositions.size();
+		chooseBar.setPosition(barPositions[selectIndex]);
+		Square.setPosition(squarePositions[selectIndex]);
 	}
 
-
-	if (InputMgr::GetKeyDown(sf::Keyboard::Down));
+	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
 	{
-		chooseBar.setPosition({ FRAMEWORK.GetWindowSizeF().x / 2 - 300.f, bounds.height / 2.f + 100.f });
+		if (selectIndex == 0)
+		{
+			SCENE_MGR.ChangeScene(SceneIds::Game);
+		}
+		if (selectIndex == 1)
+		{
+			SCENE_MGR.ChangeScene(SceneIds::Game);
+		}
 	}
-
 }
+
 
 void MenuUi::Draw(sf::RenderWindow& window)
 {
 	window.draw(chooseBar);
+	window.draw(Square);
 }

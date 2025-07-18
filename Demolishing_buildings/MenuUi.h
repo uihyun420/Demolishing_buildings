@@ -10,8 +10,15 @@ protected:
 	sf::Sprite chooseBar;
 	std::string choosebartexIds = "graphics/choosebar.png";
 
+	int selectIndex = 0; 
+	std::vector<sf::Vector2f> barPositions; 
+
+	sf::RectangleShape Square;
+	std::vector<sf::Vector2f> squarePositions;
+
 	TextGo* selectText;
 	sf::String selecttexIds = "fonts/Galmuri11-Bold.ttf";
+
 	
 public:
 	MenuUi(const std::string& name = "");

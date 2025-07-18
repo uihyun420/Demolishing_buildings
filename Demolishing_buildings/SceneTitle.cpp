@@ -22,6 +22,7 @@ void SceneTitle::Init()
 	titlebackground = new TitleBackGround("titlebackground");
 	chooseBar = new MenuUi("chooseBar");
 
+
 	AddGameObject(titlebackground);
 	AddGameObject(chooseBar);
 
@@ -71,23 +72,12 @@ void SceneTitle::Exit()
 void SceneTitle::Update(float dt)
 {
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
-	//if (InputMgr::GetKeyDown(sf::Keyboard::Up));
+
+	//if(InputMgr::GetKeyDown(sf::Keyboard::Enter))
 	//{
-	//	chooseBar->SetPosition({ FRAMEWORK.GetWindowSizeF().x / 2 - 300.f, bounds.height / 2.f - 100.f });
+	//	SCENE_MGR.ChangeScene(SceneIds::Game);
 	//}
 
-
-	//if (InputMgr::GetKeyDown(sf::Keyboard::Down));
-	//{
-	//	chooseBar->SetPosition({ FRAMEWORK.GetWindowSizeF().x / 2 - 300.f, bounds.height / 2.f + 100.f });
-	//}
-
-
-
-	if(InputMgr::GetKeyDown(sf::Keyboard::Enter))
-	{
-		SCENE_MGR.ChangeScene(SceneIds::Game);
-	}
 	Scene::Update(dt);
 }
 
