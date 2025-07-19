@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "SceneGame.h"
+#include "EasyScene.h"
 #include "Player.h"
 #include "BackGround.h"
 #include "AniPlayer.h"
@@ -12,12 +12,12 @@
 #include "ComboText.h"
 #include "SpecialAttack.h"
 
-SceneGame::SceneGame()
+EasyScene::EasyScene()
 	:Scene(SceneIds::Game)
 {
 }
 
-void SceneGame::Init()
+void EasyScene::Init()
 {
 	fontIds.push_back("fonts/Galmuri11-Bold.ttf");
 
@@ -50,8 +50,11 @@ void SceneGame::Init()
 	
 	building->SetPlayer(player);
 	building->SetDebris(debris);
+
 	scoreText->SetScore(0);
+
 	specialAttack->SetPlayer(player);
+
 	player->SetBuilding(building); // 플레이어와 빌딩 연결해야 충돌검사 등 진행
 	player->SetScoreCombo(comboText);
 	player->SetStaminaBarGage(staminabar); // 이거 반대로 했었음 플레이어가 스테미너바의 스테미너 게이지에 이어지도록
@@ -71,7 +74,7 @@ void SceneGame::Init()
 
 	Scene::Init();
 }
-void SceneGame::Enter()
+void EasyScene::Enter()
 {
 	auto size = FRAMEWORK.GetWindowSizeF(); // 창 크기 가져오기
 	sf::Vector2f center{ size.x * 0.5f, size.y * 0.5f }; // 중앙 위치 계산
@@ -89,13 +92,16 @@ void SceneGame::Enter()
 	Scene::Enter();
 }
 
-void SceneGame::Exit()
+void EasyScene::Exit()
 {
 	Scene::Exit();
 }
 
-void SceneGame::Update(float dt)
+void EasyScene::Update(float dt)
 {
+	//building->SetPosition({ 0.f, -1000.f }); 
+
+
 	worldView.setCenter(player->GetPosition().x, player->GetPosition().y); // 플레이어 위치에 따라 뷰 이동
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
@@ -105,7 +111,7 @@ void SceneGame::Update(float dt)
 	Scene::Update(dt);
 }
 
-void SceneGame::Draw(sf::RenderWindow& window)
+void EasyScene::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);	
 }

@@ -73,11 +73,6 @@ void SceneTitle::Update(float dt)
 {
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
 
-	//if(InputMgr::GetKeyDown(sf::Keyboard::Enter))
-	//{
-	//	SCENE_MGR.ChangeScene(SceneIds::Game);
-	//}
-
 	Scene::Update(dt);
 }
 

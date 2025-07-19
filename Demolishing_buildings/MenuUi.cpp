@@ -100,7 +100,7 @@ void MenuUi::Update(float dt)
 	{
 		if (selectIndex == 0)
 		{
-			SCENE_MGR.ChangeScene(SceneIds::Game);
+			SCENE_MGR.ChangeScene(SceneIds::Easy);
 		}
 		if (selectIndex == 1)
 		{
