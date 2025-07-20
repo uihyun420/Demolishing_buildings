@@ -6,11 +6,12 @@ public:
 	~HitBox() = default;
 
 	sf::RectangleShape rect;
-	bool isActive = true;
+	bool active = true;
+	bool IsActive() const { return active; }
+	void SetActive(bool a) { active = a; }
 
 	void UpdateTransform(const sf::Transformable& tr, const sf::FloatRect& localBounds);
 	void Draw(sf::RenderWindow& window);
-
 
 };
 

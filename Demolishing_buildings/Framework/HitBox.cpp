@@ -5,7 +5,7 @@ HitBox::HitBox()
 {
 	rect.setFillColor(sf::Color::Transparent);
 	rect.setOutlineColor(sf::Color::Green);
-	rect.setOutlineThickness(1.f);
+	rect.setOutlineThickness(2.f);
 }
 
 void HitBox::UpdateTransform(const sf::Transformable& tr, const sf::FloatRect& localBounds)
@@ -20,7 +20,7 @@ void HitBox::UpdateTransform(const sf::Transformable& tr, const sf::FloatRect& l
 
 void HitBox::Draw(sf::RenderWindow& window)
 {
-	if (Variables::isDrawHitBox)
+	if (active && Variables::isDrawHitBox)
 	{
 		window.draw(rect);
 	}

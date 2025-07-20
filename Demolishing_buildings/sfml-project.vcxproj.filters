@@ -114,6 +114,12 @@
     <ClCompile Include="EasyScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="EasyBuilding.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="EasyBackGround.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\InputMgr.h">
@@ -222,6 +228,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="EasyScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="EasyBuilding.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="EasyBackGround.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

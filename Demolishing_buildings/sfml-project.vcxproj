@@ -144,6 +144,8 @@
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="ComboText.cpp" />
     <ClCompile Include="Debris.cpp" />
+    <ClCompile Include="EasyBackGround.cpp" />
+    <ClCompile Include="EasyBuilding.cpp" />
     <ClCompile Include="EasyScene.cpp" />
     <ClCompile Include="Framework\AnimationClip.cpp" />
     <ClCompile Include="Framework\Animator.cpp" />
@@ -181,6 +183,8 @@
     <ClInclude Include="Building.h" />
     <ClInclude Include="ComboText.h" />
     <ClInclude Include="Debris.h" />
+    <ClInclude Include="EasyBackGround.h" />
+    <ClInclude Include="EasyBuilding.h" />
     <ClInclude Include="EasyScene.h" />
     <ClInclude Include="Framework\AnimationClip.h" />
     <ClInclude Include="Framework\Animator.h" />

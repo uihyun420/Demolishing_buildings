@@ -1,16 +1,16 @@
 #include "stdafx.h"
 #include "EasyScene.h"
 #include "Player.h"
-#include "BackGround.h"
 #include "AniPlayer.h"
 #include "Building.h"
 #include "Ground.h"
-#include "Sky.h"
 #include "Debris.h"
 #include "StaminaBar.h"
 #include "ScoreText.h"
 #include "ComboText.h"
 #include "SpecialAttack.h"
+#include "EasyBuilding.h"
+#include "EasyBackGround.h"
 
 EasyScene::EasyScene()
 	:Scene(SceneIds::Game)
@@ -21,12 +21,10 @@ void EasyScene::Init()
 {
 	fontIds.push_back("fonts/Galmuri11-Bold.ttf");
 
-	texIds.push_back("graphics/bg.png");
+
 	texIds.push_back("graphics/ground.png");
-	texIds.push_back("graphics/sky.png");
 	texIds.push_back("graphics/stand.png");
 	texIds.push_back("graphics/jump.png");
-	texIds.push_back("graphics/building.png");
 	texIds.push_back("graphics/standattack.png");
 	texIds.push_back("graphics/jumpattack.png");
 	texIds.push_back("graphics/standguard.png");
@@ -35,42 +33,42 @@ void EasyScene::Init()
 	texIds.push_back("graphics/buildingbreak03.png");
 	texIds.push_back("graphics/buildingbreak04.png");
 	texIds.push_back("graphics/specialattack.png");
+	texIds.push_back("graphics/easybuilding.png");
+	texIds.push_back("graphics/easybackground.png");
+	
 	
 	player = new Player("Player");
-	background = new BackGround("background");
-	building = new Building("building"); 
+	easybuilding = new EasyBuilding("easybuilding");
 	ground = new Ground("ground");
-	sky = new Sky("sky");
 	debris = new Debris("debris");
 	staminabar = new StaminaBar("staminabar");
 	scoreText = new ScoreText("scoreText");
 	comboText = new ComboText("comboText");
 	specialAttack = new SpecialAttack("specialAttack");
-
+	easybackground = new EasyBackGround("easybackground");
 	
-	building->SetPlayer(player);
-	building->SetDebris(debris);
-
+	
+	easybuilding->SetPlayer(player);
+	easybuilding->SetDebris(debris);
 	scoreText->SetScore(0);
-
 	specialAttack->SetPlayer(player);
 
-	player->SetBuilding(building); // 플레이어와 빌딩 연결해야 충돌검사 등 진행
+
+	player->SetEasyBuilding(easybuilding); 
 	player->SetScoreCombo(comboText);
 	player->SetStaminaBarGage(staminabar); // 이거 반대로 했었음 플레이어가 스테미너바의 스테미너 게이지에 이어지도록
 	player->SetScoreText(scoreText);
 	player->SetSpecialAttack(specialAttack);
 
 	AddGameObject(player);
-	AddGameObject(background);
-	AddGameObject(building); 
+	AddGameObject(easybuilding);
 	AddGameObject(ground);
-	AddGameObject(sky);
 	AddGameObject(debris);
 	AddGameObject(scoreText);
 	AddGameObject(staminabar);
 	AddGameObject(comboText);
 	AddGameObject(specialAttack);
+	AddGameObject(easybackground);
 
 	Scene::Init();
 }
@@ -99,9 +97,6 @@ void EasyScene::Exit()
 
 void EasyScene::Update(float dt)
 {
-	//building->SetPosition({ 0.f, -1000.f }); 
-
-
 	worldView.setCenter(player->GetPosition().x, player->GetPosition().y); // 플레이어 위치에 따라 뷰 이동
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))

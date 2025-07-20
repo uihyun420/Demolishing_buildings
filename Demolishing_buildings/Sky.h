@@ -4,7 +4,8 @@ class Sky : public GameObject
 {
 protected:
 	sf::Sprite sky;
-	std::string skytexIds = "graphics/sky.png";
+	std::string skytexIds = "graphics/sky.png";	
+	
 public:
 	Sky(const std::string& name = "");
 	virtual ~Sky() = default;

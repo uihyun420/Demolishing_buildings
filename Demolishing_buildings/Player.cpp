@@ -7,6 +7,7 @@
 #include "ScoreText.h"
 #include "ComboText.h"
 #include "SpecialAttack.h"
+#include "EasyBuilding.h"
 
 
 Player::Player(const std::string& name)
@@ -177,7 +178,7 @@ void Player::Update(float dt)
 					isDefense = true;
 					body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
 					BodyReset();
-					building->SetVelocity({ 0.f, -300.f });
+					building->SetVelocity({ 0.f, -400.f });
 					velocity.y = 3000.f;
 				}
 
@@ -193,12 +194,55 @@ void Player::Update(float dt)
 		}
 	}
 
+	if (easybuilding) // 빌딩 객체가 설정되어 있는 경우에만 충돌 검사 진행
+	{
+		if (Utils::CheckCollision(hitBox.rect, easybuilding->GetHitBox()))
+		{
+			sf::FloatRect playerBounds = hitBox.rect.getGlobalBounds();
+			sf::FloatRect buildingBounds = easybuilding->GetHitBox().getGlobalBounds();
+			//std::cout << "xxxx" << std::endl; 
+
+			sf::Vector2f push = { 0.f, 300.f };
+
+			if (velocity.y < 0 && playerBounds.top < buildingBounds.height)
+			{
+				velocity = easybuilding->SetVelocity(push);
+			}
+
+			if (Utils::CheckCollision(hitBox.rect, easybuilding->GetHitBox()))
+			{
+				if (InputMgr::GetKeyDown(sf::Keyboard::Down))
+				{
+					isDefense = true;
+					body.setTexture(TEXTURE_MGR.Get(texIdsstandguard), true);
+					BodyReset();
+					easybuilding->SetVelocity({ 0.f, -300.f });
+					velocity.y = 3000.f;
+				}
+
+				if (InputMgr::GetKeyDown(sf::Keyboard::Z) && isAttack && attackinterval >= 0.5f)
+				{
+					attackinterval = 1.0f;
+					easybuilding->TakeDamage02(attack);
+					scoreText->SetScore(100);
+					comboText->SetCombo(0);
+					SOUND_MGR.Play(Audio::attack);
+				}
+			}
+		}
+	}
+
+
 	if (InputMgr::GetKeyDown(sf::Keyboard::X) && canspecialAttack)
 	{
 		specialAttack->Skill(position, {0.f,-1000.f}, 4.f, specialattack);
-		//velocity.y = -3000.f;
 		
-		building->TakeDamage(specialattack);
+		if (easybuilding)
+			easybuilding->TakeDamage02(specialattack);
+
+		if (building)
+			building->TakeDamage(specialattack);
+
 		scoreText->SetScore(300);
 		comboText->SetCombo(0);
 		specialAttack->SetActive(true);
@@ -259,7 +303,6 @@ void Player::Update(float dt)
 void Player::Draw(sf::RenderWindow& window)
 {
 	window.draw(body);
-	//window.draw(specialattack);
 	hitBox.Draw(window);
 }
 

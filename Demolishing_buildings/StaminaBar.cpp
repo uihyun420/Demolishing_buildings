@@ -57,7 +57,7 @@ void StaminaBar::Release()
 void StaminaBar::Reset()
 {
 	initSize = { 300.f, 50.f };
-	staminaBar.setFillColor(sf::Color::White);
+	staminaBar.setFillColor(sf::Color::Red);
 	staminaBar.setSize(initSize);
 	SetPosition({ FRAMEWORK.GetWindowSizeF().x / 2 - 150 ,FRAMEWORK.GetWindowSizeF().y - 100.f });
 }
@@ -72,7 +72,7 @@ void StaminaBar::Draw(sf::RenderWindow& window)
 	window.draw(staminaBar);
 }
 
-void StaminaBar::SetValue(float stamina, float maxstamina) //  함수이름 똑같이 쓰지마라 뒈지기싫으면
+void StaminaBar::SetValue(float stamina, float maxstamina) 
 {
 	staminaBar.setSize({ initSize.x * (stamina / maxstamina) , initSize.y });
 }

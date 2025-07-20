@@ -7,21 +7,20 @@ class StaminaBar;
 class ComboText;
 class ScoreText;
 class SpecialAttack;
+class EasyBuilding;
 
 class Player : public GameObject
 {
 protected:
 	sf::Sprite body;
-	//sf::Sprite specialattack;
 
 	std::string texIds = "graphics/stand.png";
 	std::string texIdsJump = "graphics/jump.png";
 	std::string texIdsAttack = "graphics/standattack.png";
 	std::string texIdsJumpAttack = "graphics/jumpattack.png";
 	std::string texIdsstandguard = "graphics/standguard.png";
-	//std::string texIdsSpecialAttack = "graphics/specialattack.png";
 
-	sf::Vector2f gravity = { 0.f, 150.f };
+	sf::Vector2f gravity = { 0.f, 300.f };
 	sf::Vector2f velocity = { 0.f, 0.f };
 	bool isGrounded = true;
 	bool isAttack = false;
@@ -50,6 +49,8 @@ protected:
 	ScoreText* scoreText;
 	ComboText* comboText;
 	SpecialAttack* specialAttack;
+	EasyBuilding* easybuilding;
+
 public:
 	Player(const std::string& name = "");
 	~Player() override = default;
@@ -73,6 +74,7 @@ public:
 	void TakeDamage(int damage);
 	void Die();
 
+	void SetEasyBuilding(EasyBuilding* b) { easybuilding = b; }
 	void SetBuilding(Building* b) { building = b; }
 	void SetStaminaBarGage(StaminaBar* staminabar);
 	void SetScoreText(ScoreText* scoreText);

@@ -2,8 +2,6 @@
 #include "Scene.h"
 
 class Player;
-class BackGround;
-class Building;
 class Ground;
 class Sky;
 class Debris;
@@ -11,15 +9,15 @@ class StaminaBar;
 class ScoreText;
 class ComboText;
 class SpecialAttack;
-
+class EasyBuilding;
+class EasyBackGround;
 
 
 class EasyScene : public Scene
 {
 protected:
 	Player* player;
-	BackGround* background;
-	Building* building;
+	EasyBackGround* easybackground;
 	Ground* ground;
 	Sky* sky;
 	Debris* debris;
@@ -27,6 +25,7 @@ protected:
 	ScoreText* scoreText;  // ui들도 게임씬에 그려야함 uiview라는게 따로 새로운 씬을 만들어서 하는게 아님 
 	ComboText* comboText;
 	SpecialAttack* specialAttack;
+	EasyBuilding* easybuilding;
 
 public:
 	EasyScene();

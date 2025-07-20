@@ -83,7 +83,7 @@ void MenuUi::Update(float dt)
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Up))
 	{
-		selectIndex = (selectIndex + barPositions.size() - 1) % barPositions.size();
+		selectIndex = (selectIndex + barPositions.size() - 1) % barPositions.size(); 
 		chooseBar.setPosition(barPositions[selectIndex]);
 		Square.setPosition(squarePositions[selectIndex]);
 		SOUND_MGR.Play(Audio::click); 

@@ -7,7 +7,7 @@ protected:
 	std::string debrisTexIds;
 
 	std::vector<sf::Vector2f> velocity;
-	sf::Vector2f gravity = { 0.f, 500.f };
+	sf::Vector2f gravity = { 0.f, 1000.f };
 
 	std::vector<std::string> debrisTexIdsList = 
 	{

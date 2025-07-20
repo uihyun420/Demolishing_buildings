@@ -57,14 +57,15 @@ void Building::Reset()
 	building.setTexture(TEXTURE_MGR.Get(texIds));
 	building.setPosition(0.f, -2000.f);
 	building.setScale(0.8f, 0.8f);
-	isGrounded = false;
+
 	SetOrigin(Origins::MC);
 	SetActive(true);
-	
-	velocity = { 0.f, 0.f };
-	gravity = { 0.f, 170.f };
+	isGrounded = false;
 
-	hp = 1000;
+	velocity = { 0.f, 0.f };
+	gravity = { 0.f, 350.f };
+
+	hp = 2000;
 	attack = 1000;
 }
 
@@ -73,6 +74,7 @@ void Building::Update(float dt)
 	if (!GetActive()) return; // 활성화되지 않은 경우 업데이트하지 않음
 
 	hitBox.UpdateTransform(building, building.getLocalBounds());
+
 
 	if (!isGrounded)  
 	{
@@ -104,6 +106,7 @@ void Building::Update(float dt)
 
 void Building::Draw(sf::RenderWindow& window)
 {
+
 	window.draw(building);
 	hitBox.Draw(window);
 }
@@ -120,16 +123,16 @@ void Building::TakeDamage(int attack)
 	{
 		hp = 0;
 		Destroy();
-		
 	}
 }
 
 void Building::Destroy()
 {
 	SetActive(false);
+	hitBox.SetActive(false);
+	hitBox.rect.setSize({ 0.f, 0.f });
 	SOUND_MGR.Play(Audio::buildingbreak);
-	//hitBox.rect.setSize({ 0.f, 0.f });
-	//hitBox.isActive = false;
+
 	if (debris)
 	{
 		debris->SpawnDebris(building.getPosition(), 4);
