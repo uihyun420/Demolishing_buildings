@@ -16,6 +16,8 @@ class EasyBackGround;
 class EasyScene : public Scene
 {
 protected:
+	bool isPaused = false;
+
 	Player* player;
 	EasyBackGround* easybackground;
 	Ground* ground;

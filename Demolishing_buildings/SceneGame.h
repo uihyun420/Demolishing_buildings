@@ -17,6 +17,8 @@ class SpecialAttack;
 class SceneGame : public Scene
 {
 protected:
+	bool isPaused = false;
+
 	Player* player;
 	BackGround* background;
 	Building* building;

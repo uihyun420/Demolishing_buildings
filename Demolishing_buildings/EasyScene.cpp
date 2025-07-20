@@ -97,6 +97,15 @@ void EasyScene::Exit()
 
 void EasyScene::Update(float dt)
 {
+	if (InputMgr::GetKeyDown(sf::Keyboard::Escape))
+	{
+		isPaused = !isPaused;
+	}
+	if (isPaused)
+	{
+		return;
+	}
+
 	worldView.setCenter(player->GetPosition().x, player->GetPosition().y); // 플레이어 위치에 따라 뷰 이동
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
@@ -109,4 +118,15 @@ void EasyScene::Update(float dt)
 void EasyScene::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);	
+
+	if (isPaused)
+	{
+		sf::Text pausedText;
+		pausedText.setFont(FONT_MGR.Get("fonts/Galmuri11-Bold.ttf"));
+		pausedText.setString("PAUSED");
+		pausedText.setCharacterSize(80);
+		pausedText.setFillColor(sf::Color::Black);
+		pausedText.setPosition(475, 300);
+		window.draw(pausedText);
+	}
 }
