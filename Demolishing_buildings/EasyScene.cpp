@@ -84,9 +84,6 @@ void EasyScene::Enter()
 	worldView.setSize(size);
 	worldView.setCenter(player->GetPosition().x, player ->GetPosition().y);
 
-	//uiView.setSize({ FRAMEWORK.GetWindowSizeF().x, FRAMEWORK.GetWindowSizeF().y });
-	//uiView.setCenter({ FRAMEWORK.GetWindowSizeF().x / 2, FRAMEWORK.GetWindowSizeF().y / 2 });
-
 	Scene::Enter();
 }
 
